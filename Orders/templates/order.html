@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/order.js' %}"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+{% endblock %}
+{% block content %}
+        <div class="order">
+        <h1>Оформление заказа</h1>
+            <hr>
+        <form name="contact-form" method="POST">{% csrf_token %}
+            <div class="row">
+            <div class="col-xs-6">
+             <h3><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h3>
+
+            <p>Ваше имя: <span class="star">*</span></p>
+            {{ form_order.first_name }}
+            <p>Ваша фамилия: <span class="star">*</span></p>
+            {{ form_order.last_name }}
+            <p>Ваш номер телефона: <span class="star">*</span></p>
+            {{ form_order.phone }}
+             {{ form_order.phone.errors }}
+            </div>
+            <div class="col-xs-6">
+                <h3><i class="fa fa-map-marker" aria-hidden="true"></i> Адрес доставки</h3>
+                <p>Город: <span class="star">*</span></p>
+                {{ form_order.city }}
+                <p>Улица: <span class="star">*</span></p>
+                {{ form_order.street }}
+                <div class="inline">
+                    <p>Дом: <span class="star">*</span></p>
+                    {{ form_order.house }}
+                </div>
+                <div class="inline">
+                    <p>Стр.:</p>
+                    {{ form_order.building }}
+                </div>
+                <div class="inline">
+                    <p>Кв./Офис: <span class="star">*</span></p>
+                    {{ form_order.flat }}
+                </div>
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3><i class="fa fa-truck" aria-hidden="true"></i> Доставка</h3>
+                    <table style="margin-top: 30px" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Служба</th>
+                            <th>Время доставки</th>
+                            <th>Цена</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <input class="logist" type="radio" name="logistic" value="mail" required="" id="id_logistic_0">
+                                <img src="{{ url }}/media/image/mail.gif" alt="">
+                                <span><b>Почта России</b></span>
+                            </td>
+                            <td>3-6 дней</td>
+                            <td><b>300</b> р.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="logist" type="radio" name="logistic" value="courier" required="" id="id_logistic_1">
+                                <img width="30" src="{{ url }}/media/image/courier.png" alt="">
+                                <span><b>Доставка нашим курьером</b></span>
+                            </td>
+                            <td>1-2 дня</td>
+                            <td><b>500</b> р.</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="logist" type="radio" name="logistic" value="cdek" required="" id="id_logistic_2">
+                                <img src="{{ url }}/media/image/cdek.gif" alt="">
+                                <span><b>СДЭК</b></span>
+                            </td>
+                            <td>2-3 дня</td>
+                            <td><b>380</b> р.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3><i class="fa fa-money" aria-hidden="true"></i> Оплата</h3>
+                    <table style="margin-top: 30px" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Вид оплаты</th>
+                            <th>Описание</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td width="400px">
+                                <div style="display: inline-block">
+                                    <input type="radio" name="payment" value="cash" required="" id="id_payment_0">
+                                </div>
+                                <div style="display: inline-block">
+                                    <img width="60" src="{{ url }}/media/image/cash.jpg" alt="">
+                                </div>
+                                <div style="display: inline-block">
+                                    <span><b>Оплата наличными при получении заказа</b></span>
+                                </div>
+                            </td>
+                            <td>Вы можете оплатить Ваш заказ наличными деньгами или банковской картой
+                                в Пунктах самовывоза или курьеру при получении заказа.</td>
+                        </tr>
+                         <tr>
+                            <td width="400px">
+                                <div style="display: inline-block">
+                                    <input type="radio" name="payment" value="imposed" required="" id="id_payment_1">
+                                </div>
+                                <div style="display: inline-block">
+                                    <img width="60" src="{{ url }}/media/image/imposed.gif" alt="">
+                                </div>
+                                <div style="display: inline-block">
+                                    <span><b>Наложенный платеж</b></span>
+                                </div>
+                            </td>
+                            <td>Вы можете оплатить Ваш заказ в почтовом отделении при получении посылки.</td>
+                        </tr>
+                        <tr>
+                            <td width="400px">
+                                <div style="display: inline-block">
+                                    <input type="radio" name="payment" value="card" required="" id="id_payment_2">
+                                </div>
+                                <div style="display: inline-block">
+                                    <img width="60" src="{{ url }}/media/image/card.jpg" alt="">
+                                </div>
+                                <div style="display: inline-block">
+                                    <span><b>Оплата банковской картой на сайте</b></span>
+                                </div>
+                            </td>
+                            <td>Вы можете оплатить Ваш заказ в режиме Он-лайн прямо
+                                на нашем сайте сразу же после оформления заказа.</td>
+                        </tr>
+                        <tr>
+                            <td width="400px">
+                                <div style="display: inline-block">
+                                    <input type="radio" name="payment" value="non-cash" required="" id="id_payment_3">
+                                </div>
+                                <div style="display: inline-block">
+                                    <img width="60" src="{{ url }}/media/image/non-cash.gif" alt="">
+                                </div>
+                                <div style="display: inline-block">
+                                    <span><b>Безналичный расчет</b></span>
+                                </div>
+                            </td>
+                            <td>Перевод денежных средств за заказ на наш
+                                расчетный счет на основании выставленного счета.</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3><i class="fa fa-bars" aria-hidden="true"></i> Состав продуктов в вашем заказе</h3>
+                    <table style="margin-top: 30px" class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Скидка</th>
+                            <th>Количество</th>
+                            <th>Цена за ед.</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in products %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                            {% if item.product.sail_procent %}
+                                <td>{{ item.product.sail_procent }} %</td>
+                            {% else %}
+                            <td>0 %</td>
+                            {% endif %}
+                                <td class="count-amount">{{ item.count }}</td>
+                                {% if item.product.new_price %}
+                                    <td><span><b class="price-amount">{{ item.product.new_price }}</b></span> руб.</td>
+                                {% else %}
+                                    <td><span><b class="price-amount">{{ item.product.price }}</b></span> руб.</td>
+                                {% endif %}
+
+                            </tr>
+
+                        {% endfor %}
+                        <tr>
+                            <td colspan="3">Доставка</td>
+                            <td><b id="logist">0</b> руб.</td>
+                        </tr>
+                        <tr>
+                            <td class="success" colspan="3">Итого</td>
+                            <td class="success"><b id="amount-price-order"></b> руб.</td>
+                            <input hidden type="text" name="amount_price" value="" id="amount-price-order-input" maxlength="100" required="">
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3><i class="fa fa-commenting-o" aria-hidden="true"></i> Комментарий к заказу</h3>
+                    {{ form_order.comment }}
+                </div>
+            </div>
+            <div class="row" style="margin: 30px 0 30px -15px">
+                <div class="col-xs-12">
+                    <button style="height: 40px; width: 180px; font-size: 18px" type="submit" class="btn btn-info">Оформить заказ</button>
+                </div>
+            </div>
+
+
+
+
+        </form>
+
+        </div>
+
+{% endblock %}

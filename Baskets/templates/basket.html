@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/basket.js' %}"></script>
+{% endblock %}
+
+{% block middle %}
+    <div class="col-xs-12">
+        {% if elementsBasket %}
+            <h3>В вашей корзине на данный момент:</h3>
+            <table class="table" style="font-size: 17px">
+                <thead>
+                <tr style="background: #f5f5f5">
+                    <th width="400">Товар</th>
+                    <th width="40">Скидка</th>
+                    <th width="70">Вес</th>
+                    <th width="70">Цена</th>
+                    <th width="40">Количество</th>
+                    <th width="40"></th>
+                </tr>
+                </thead>
+                {% for item in elementsBasket %}
+
+                    <form class="form-create-count" action="{% url 'change_count_in_basket' product_id=item.product.pk %}" method="POST">{% csrf_token %}
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div onclick="location.href='{{ item.product.get_absolute_url }}'" class="product-photo-basket">
+                                    <div class="border-photo">
+                                        {% with item.product.imageproduct_set.all|first as imageItem %}
+                                            <img src="{{ url }}/media/{{ imageItem.image_resize }}" alt="">
+                                        {% endwith %}
+                                    </div>
+                                </div>
+                                <div onclick="location.href='{{ item.product.get_absolute_url }}'" class="product-tittle-basket">
+                                    {{ item.product.name }}
+                                </div>
+
+                            </td>
+                            <td class="sale" style="padding-top: 20px">
+                                {% if item.product.sail_procent %}
+                                    <span>{{ item.product.sail_procent }}</span> %
+                                {% else %}
+                                    <span>0</span> %
+                                {% endif %}
+                            </td>
+                            <td class="weight-basket" style="padding-top: 20px">
+                                <span id="{{ item.product.weight }}"></span>
+                                <p style="opacity: 0.5; font-size: 12px">(ед. {{ item.product.weight }} г.)</p>
+                            </td>
+                            <td class="price-basket" style="padding-top: 20px">
+                                {% if item.product.new_price %}
+                                    <b id="{{ item.product.new_price }}"></b> р.
+                                    <p style="opacity: 0.5; font-size: 12px">(за ед. {{ item.product.new_price }})</p>
+                                {% else %}
+                                    <b id="{{ item.product.price }}"></b> р.
+                                    <p style="opacity: 0.5; font-size: 12px">(за ед. {{ item.product.price }})</p>
+                                {% endif %}
+                            </td>
+                            <td class="count-basket" style="padding-top: 20px">
+                                <div>
+                                    <span class="minplus down minplus-basket"><span class="glyphicon glyphicon-minus" style="vertical-align: middle"></span></span><input class="input-count" name="count-in-basket" value="{{ item.count }}"><span class="minplus up minplus-basket"><span class="glyphicon glyphicon-plus" style="vertical-align: middle"></span></span>
+                                    <button hidden class="button-create-count" type="submit"></button>
+                                    <input hidden class="max-count-product" value="{{ item.product.number }}">
+                                </div>
+                            </td>
+                            <td style="padding-top: 16px; font-size: 25px;">
+                                <i id="{{ item.product.id }}" class="delete-element fa fa-times" aria-hidden="true"></i>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </form>
+
+                {% endfor %}
+            </table>
+            <hr>
+            <div class="amount-price-weight">
+                <p>Количество товаров: <span id="amount-count"></span> ед.</p><br>
+                <p>Общий вес: <span id="amount-weight"></span> г.</p><br>
+                <p style="color: red;">Скидка: <span id="amount-sale"></span> р.</p><br>
+                <p style="font-weight: bold">Итого cо скидкой: <span id="amount-price"></span> р.</p><br>
+                <button onclick="location.href='/order'" style="margin-top: 30px; float: right" type="button" class="btn btn-info">Оформить заказ</button>
+            </div>
+
+        {% else %}
+            <div style="text-align: center">
+            <img src="{{ url }}/media/image/empty-cart.jpg" alt="">
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

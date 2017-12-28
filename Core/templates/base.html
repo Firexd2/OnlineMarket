@@ -1,0 +1,155 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static '../static/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static '../static/css/bootstrap-theme.css' %}">
+    <link rel="stylesheet" href="{% static '../static/market.css' %}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="//malsup.github.com/jquery.form.js"></script>
+    <script src="{% static '../static/js/bootstrap.js' %}"></script>
+    <script src="{% static '../static/js/npm.js' %}"></script>
+    <script src="{% static '../static/js/base.js' %}"></script>
+    {% block scripts %}
+    {% endblock %}
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<div class="container">
+    <header>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header">
+                    {% block head %}{% include 'head.html' %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin: 0; padding: 12px 0 12px 0;">
+            <div class="col-xs-2 col-xs-2-5" style="padding: 0">
+                <a href="/catalog/" class="category-href">
+                    <div class="category one-cat">
+                        Каталог
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-2 col-xs-2-5" style="padding: 0">
+                <a href="/catalog/novinki/" class="category-href">
+                    <div class="category">
+                        Новинки
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-2 col-xs-2-5" style="padding: 0">
+                <a href="/catalog/hit_prodazh/" class="category-href">
+                    <div class="category">
+                        Хит продаж
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-2 col-xs-2-5" style="padding: 0">
+                <a href="/{{ category.get_absolute_url }}" class="category-href">
+                    <div class="category">
+                        Акции
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-2 col-xs-2-5" style="padding: 0">
+                <a href="/catalog/rasprodazha/" class="category-href">
+                    <div class="category">
+                        Распродажа
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+    <body>
+    <div class="row">
+        {% block middle %}
+            <div class="col-xs-3" style="padding: 0 15px 0 15px">
+                <div class="leftbar">
+                    {% block leftbar %}{% include 'leftbar.html' %}{% endblock %}
+                </div>
+            </div>
+            <div class="col-xs-9" style="padding: 0 15px 0 15px">
+                <div class="content">
+                    {% block content %}
+                        {% block information %}
+                            {% include 'banner.html' %}
+                        {% endblock %}
+                        <div class="col-md-12">
+                            <div class="content">
+                                <div class="row">
+                                    {% for product in products_list %}
+                                        {% include 'products_list.html' %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+            </div>
+        {% endblock %}
+    <div onclick="location.href='/basket/'" id="hide-basket">
+        <p><i class="fa fa-shopping-cart" style="color: #ff9a06; font-size: 21px" aria-hidden="true"></i>
+            <span>Товаров:</span> <b id="hide-basket-count">{{ number_product_in_basket }}</b>
+            <span>На сумму:</span>
+            <b id="hide-basket-total">{{ total_amount }} р.</b></p>
+    </div>
+
+    <div id="modal-window-for-favorite">
+        <h3 style="font-weight: bold; color: green">Продукт успешно добавлен в избранное!</h3>
+        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 140px"></i>
+        <h4 style="margin: 20px 0 20px 0">Этот товар теперь можно увидеть в личном кабинете!</h4>
+        <button class="btn btn-success" id="next-buy" style="font-size: 20px">Продолжить покупки</button>
+        <button onclick="window.location='/personal_room/favorites/'" class="btn btn-warning" style="font-size: 20px">Перейти в ЛК</button>
+        <div id="close-modal"><span class="glyphicon glyphicon-remove"></span></div>
+    </div>
+    <div id="modal-window-no-auth">
+        <p>Необходимо <b>авторизоваться</b>. <a href="/authentication/login/">Войдите</a>, или <a href="/authentication/register/">зарегистрируйтесь</a>.</p>
+        <div id="close-modal"><span class="glyphicon glyphicon-remove"></span></div>
+    </div>
+
+    <div id="mask"></div>
+
+    <div id="small-modal-window">
+        <p></p>
+    </div>
+
+    </body>
+    <footer>
+        <div class="row">
+            <div class="col-xs-12" style="padding: 0">
+                <div class="footer">
+                    {% block footer %}{% include 'footer.html' %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function change_button(button) {
+        var parent_button = button.parent();
+        parent_button.parent().children('.count-product').remove();
+        button.remove();
+        parent_button.append('<button onclick="location.href=\'/basket\'" type="button" class="btn btn-info">Товар в корзине</button>')
+    }
+</script>
+</html>

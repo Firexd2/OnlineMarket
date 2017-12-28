@@ -1,0 +1,17 @@
+{% extends 'personal_room.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/personal_room.js' %}"></script>
+        <script src="{% static '../static/js/product.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <h3>Ваши избранные товары:</h3>
+    <hr>
+    {% if products_in_favorites %}
+        {% for product in products_in_favorites %}
+            {% include 'products_list.html' %}
+        {% endfor %}
+    {% else %}
+        Избранных товаров нету
+    {% endif %}
+{% endblock %}

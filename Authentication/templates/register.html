@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <h3>Форма регистрации</h3>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            {% if user.is_anonymous %}
+
+                <form method="POST">{% csrf_token %}
+
+                    <p><b>Логин:</b></p>
+                    <span style="color: red">{{ form.username.errors }}</span>
+                    {{ form.username|add_class:'form-control' }}
+                    <p><b>E-mail:</b></p>
+                    <span style="color: red">{{ form.email.errors }}</span>
+                    {{ form.email|add_class:'form-control' }}
+                    <p><b>Пароль:</b></p>
+                    <span style="color: red">{{ form.password1.errors }}</span>
+                    {{ form.password1|add_class:'form-control' }}
+                    <p><b>Подтверждение пароля:</b></p>
+                    <span style="color: red">{{ form.password2.errors }}</span>
+                    {{ form.password2|add_class:'form-control' }}
+
+                    <div style="margin-top: 13px">
+                        <button class="btn btn-warning" type="submit">Зарегистрироваться</button>
+                    </div>
+                </form>
+            {% else %}
+                Вы авторизованы как {{ user }}, <a href="/authentication/logout/">выйдите</a>, чтобы зарегестрировать новый аккаунт.
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

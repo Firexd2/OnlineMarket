@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/product-page.js' %}"></script>
+    <script src="{% static '../static/js/product.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-6">
+            <div class="row">
+                <div class="col-xs-10" style="padding-right: 0">
+                    <div class="border-image">
+                        {% with product.imageproduct_set.all|first as item  %}
+                            <img id="big-image" src="{{ url }}/media/{{ item.image }}" width="100%" alt="">
+                        {% endwith %}
+                    </div>
+                </div>
+                <div class="col-xs-2" style="padding-left: 8px">
+                    <div class="container-small-image">
+                        {% for small_image in product.imageproduct_set.all %}
+                            <div class="small-image">
+                                <img src="{{ url }}/media/{{ small_image.image_resize }}" width="100%" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6" style="padding-left: 30px">
+            <p class="tittle-product-detail">
+                {{ product.name }}
+            </p>
+            <hr>
+            {% if product.availability %}
+                <p class="availability-product-detail">
+                    Есть в наличии на складе {{ product.number }} ед.
+                </p>
+            {% else %}
+                <p style="color: red">В наличии нет</p>
+            {% endif %}
+            {% if product.new_price %}
+                <div class="price-product-detail">
+                    Цена:
+                    <p> <span class="no-price" style="font-size: 19px">{{ product.price }}</span>
+                        <span>{{ product.new_price }} руб.</span></p>
+                </div>
+            {% else %}
+                <div class="price-product-detail">
+                    Цена:
+                    <p><b>{{ product.price }}</b> руб.</p>
+                </div>
+            {% endif %}
+
+            <form class="form-product" method="POST" action="/basket/add_product_in_basket">{% csrf_token %}
+                <input name="id" hidden type="text" value="{{ product.id }}">
+                <div class="add-product-basket detail-product">
+                    {% if product.availability %}
+                        <div class="count-product">
+                            <p>Количество:</p>
+                            <span class="glyphicon glyphicon-minus minplus down"></span><input class="input-count" name="count" type="text" value="1"><span class="glyphicon glyphicon-plus minplus up"></span>
+                            <input hidden class="max-count-product" value="{{ product.number }}">
+                        </div>
+                        <div class="add-basket">
+                            <button id="{{ product.id }}" class="btn btn-warning basket-button" type="submit">
+                                Добавить в корзину
+                            </button>
+                        </div>
+                        <div class="add-to-favorites btn-information" id="{{ product.id }}-{{ user }}">
+                            <p>Нравится товар?</p>
+                            <button type="button" class="btn btn-success btn-add-fav">+ в избранное</button>
+                        </div>
+
+                    {% else %}
+                        <div class="add-basket product-detail">
+                            <div class="add-to-favorites-none btn-information" id="{{ product.id }}-{{ user }}">
+                                <p>Нравится товар? Добавьте его в избранное, чтобы мы вас оповестили о его наличии!</p>
+                                <button type="button" class="btn btn-success btn-add-fav">+ в избранное</button>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if product.description %}
+        <div class="row" style="margin-top: 20px">
+            <div class="col-xs-12">
+                <div class="tittle-product-detail">
+                    Описание {{ product.name }}:
+                </div>
+                <div class="description">
+                    {{ product.description|safe }}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="row" style="margin-top: 20px; padding-bottom: 50px">
+        <div class="col-xs-12">
+            <div class="tittle-product-detail">
+                Характеристики {{ product.name }}:
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Значение</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for name, value in product.settings.all %}
+                    {% if value %}
+                        <tr>
+                            <td>{{ name }}</td>
+                            <td> {{ value }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% for item in product.imageproduct_set.all %}
+        <input hidden class="input-hide" value="{{ item.image }}">
+    {% endfor %}
+{% endblock %}
+

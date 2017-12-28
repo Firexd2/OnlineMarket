@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3 style="margin-bottom: 30px">Все категории</h3>
+    <hr>
+
+    {% for item in category_list %}
+        <div onclick="location.href='{{ item.get_absolute_url }}'" class="category-block">
+        <div>{{ item }}</div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>Ваш заказ с номером <b>{{ order_product.id }}</b> ожидает подтверждения. Ожидайте звонка!
+                <br>
+                <br>
+                Если вы авторизованы, то сейчас и в дальнейшем сможете следить за статусом своего заказа в <a href="/personal_room/">личном кабинете</a>.</h4>
+        </div>
+    </div>
+{% endblock %}

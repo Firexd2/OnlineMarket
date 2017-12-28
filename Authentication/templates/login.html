@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+    <h3>Форма входа</h3>
+    <hr>
+    {% if user.is_anonymous %}
+        <div class="row">
+        <div style="" class="col-xs-12">
+        <form method="POST">{% csrf_token %}
+            <span style="color: red">{{ form.non_field_errors }}</span>
+            <p><b>Логин:</b></p>
+            <span style="color: red">{{ form.username.errors }}</span>
+            {{ form.username|add_class:'form-control' }}
+            <p><b>Пароль:</b></p>
+            <span style="color: red">{{ form.password.errors }}</span>
+            {{ form.password|add_class:'form-control' }}
+            <p>
+                Забыли пароль? <a href="/authentication/password_reset/">Воспользуйтесь формой сброса пароля</a>!
+            </p>
+            <div style="margin-top: 20px">
+                <button class="btn btn-warning" type="submit">Войти</button>
+            </div>
+        </form>
+    {% else %}
+        Вы авторизованы как {{ user }}, <a href="/authentication/logout/">выйдите</a>, чтобы войти в другой аккаунт
+    {% endif %}
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/product.js' %}"></script>
+{% endblock %}
+{% block information %}
+    <h3 style="margin-bottom: 30px">{{ category.name }}</h3>
+    <hr>
+{% endblock %}

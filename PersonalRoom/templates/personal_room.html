@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block scripts %}
+        <script src="{% static '../static/js/personal_room.js' %}"></script>
+        <title>Интернет1 магазин</title>
+{% endblock %}
+{% block leftbar %}
+    {% include 'leftbar_personal_room.html' %}
+{% endblock %}
+{% block content %}
+
+
+    <h3>Ваши заказы:</h3>
+    <hr>
+{#    <div class="row">#}
+{#    <div style="margin-bottom: 30px" class="col-xs-12">#}
+{#        <p><b>Заказ может иметь четыре статуса</b>:</p>#}
+{#        1) <i>Обработка</i> - <img width="25" src="{{ url }}/media/image/procces.png" alt="Обработка"> <br>#}
+{#        2) <i>Готов к отправке</i> - <img width="25" src="{{ url }}/media/image/prep.png" alt="Подготовка к отправке"> <br>#}
+{#        3) <i>В дороге</i> - <img width="25" src="{{ url }}/media/image/road.png" alt="В дороге"> <br>#}
+{#        4) <i>Доставлен</i> - <img width="25" src="{{ url }}/media/image/delivered.png" alt="Доставлен"> <br>#}
+{#    </div>#}
+{#    </div>#}
+        <table id="table-order" style="border-collapse: collapse; border: 2px solid white;" class="table table-condensed">
+            <thead>
+            <tr>
+                <th width="165">Дата</th>
+                <th>Состав заказа</th>
+                <th style="text-align: center">Статус</th>
+                <th width="90">Сумма</th>
+                <th>Управление</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in orders %}
+            <tr>
+                <td>{{ item.date }}</td>
+                <td>
+                    {% for product in item.products.all %}
+
+                        <div onclick="location.href='{{ product.product.get_absolute_url }}'" class="product-personalroom">
+                            <b style="position: relative; left: 0; top: 0; z-index: 2; background: white">{{ product.product }}</b>
+                            <div style="position: relative; right: -20px; top: -11px; z-index: 1"><b style="opacity: 0.5">...................................................................................{{ product.count }}</b> ед.</div>
+                        </div>
+                        {% endfor %}
+
+                </td>
+                <td style="cursor: pointer; text-align: center">
+                    {% if item.status == 'processed' %}
+                    <span style="color: #a10000; font-weight: bold" class="procces">Обработка</span>
+                    {% elif item.status == 'preparation' %}
+                    <span style="color: darkorange; font-weight: bold" class="prep">Подготовка к отправке</span>
+                    {% elif item.status == 'road' %}
+                    <span style="color: blue; font-weight: bold" class="road">В дороге</span>
+                    {% elif item.status == 'delivered' %}
+                    <span style="color: green; font-weight: bold" class="delivered">Доставлен</span>
+                    {% endif %}
+                
+                </td>
+            <td><b>{{ item.amount_price }}</b> руб.</td>
+            <td style="text-align: center">
+
+                <button onclick="location.href='{% url 'repeat-order' id=item.id %}'" class="repeat-order btn btn-default"><img width="15" src="{{ url }}/media/image/repeat-btn.png" alt="Повторный заказ"></button>
+                <button id="{{ item.id }}" class="remove-order btn btn-default"><img width="20" src="{{ url }}/media/image/remove-order.png" alt="Удалить заказ"></button>
+
+            </td>
+            </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+{% endblock %}

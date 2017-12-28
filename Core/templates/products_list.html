@@ -1,0 +1,61 @@
+<div class="col-xs-4" style="margin-bottom: 26px">
+    <div class="product">
+        <div onclick="location.href='{{ product.get_absolute_url }}'">
+            <div class="tittle-product">{{ product.name }}</div>
+            <div class="image-product">
+                {% with product.imageproduct_set.all|first as item %}
+                    <img src="{{ url }}/media/{{ item.image_resize }}" alt="">
+                {% endwith %}
+            </div>
+            {% if product.new_price %}
+                <div class="price-product">
+                    <span class="no-price">{{ product.price }}</span>
+                    <span>{{ product.new_price }} руб.</span>
+                </div>
+            {% else %}
+                <div class="price-product">{{ product.price }} руб.</div>
+            {% endif %}
+
+            <div class="icon-product">
+                {% if '0' in product.icon_value %}
+                    <div class="icon-product-item new">
+                        <div style="padding-top: 4px">new</div>
+                    </div>
+                {% endif %}
+                {% if '1' in product.icon_value %}
+                    <div class="icon-product-item hit">
+                        <div style="padding-top: 4px">Hit</div>
+                    </div>
+                {% endif %}
+                {% if product.new_price %}
+                    <div class="icon-product-item precent">
+                        <div style="padding-top: 4px">-{{ product.sail_procent }}%</div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <form class="form-product" method="POST" action="/basket/add_product_in_basket">{% csrf_token %}
+            <input name="id" hidden type="text" value="{{ product.id }}">
+            <div class="add-product-basket">
+                {% if product.availability %}
+                    <div class="add-basket">
+                        <button id="{{ product.id }}" class="btn btn-warning basket-button" type="submit">
+                            <i class="fa fa-cart-plus" aria-hidden="true" style="color: #bdff18; font-size: 20px"></i> В корзину
+                        </button>
+                    </div>
+                    <div class="count-product">
+                        <span class="glyphicon glyphicon-minus minplus down"></span><input class="input-count" name="count" type="text" value="1"><span class="glyphicon glyphicon-plus minplus up"></span>
+                        <input hidden class="max-count-product" value="{{ product.number }}">
+                    </div>
+                {% else %}
+                    <div class="add-basket">
+                        <button disabled class="btn btn-warning" style="background: gray; border: none" type="button">
+                            Нет в наличии
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+{% extends 'personal_room.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/order.js' %}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <script src="{% static '../static/js/personal_room.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <h3>Личные данные</h3>
+    <hr>
+    <h4><i class="fa fa-address-book-o" aria-hidden="true"></i> Управление доступом</h4>
+    <br>
+    <p>
+        <button onclick="location.href='/authentication/password_change/'" class="btn btn-warning">Поменять пароль</button>
+    </p>
+    <p>
+        <button onclick="location.href='/authentication/password_reset/'" class="btn btn-danger">Сбросить пароль</button>
+    </p>
+    <br>
+
+        <h5 style="opacity: 0.5;">Если вы заполните поля, представленные ниже,
+            то при заказах контактные и адресные поля будут заполнены автоматически.</h5>
+       <form name="contact-form" class="form-personal-data" method="POST">{% csrf_token %}
+            <div class="row">
+            <div class="col-xs-6">
+             <h4><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h4>
+
+            <p>Ваше имя:</p>
+            {{ form_additional_user.first_name }}
+            <p>Ваша фамилия:</p>
+            {{ form_additional_user.last_name }}
+            <p>Ваш номер телефона:</p>
+            {{ form_additional_user.phone }}
+            </div>
+            <div class="col-xs-6">
+                <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Адрес доставки</h4>
+                <p>Город:</p>
+                {{ form_additional_user.city }}
+                <p>Улица:</p>
+                {{ form_additional_user.street }}
+                <div class="inline">
+                    <p>Дом:</p>
+                    {{ form_additional_user.house }}
+                </div>
+                <div class="inline">
+                    <p>Стр.:</p>
+                    {{ form_additional_user.building }}
+                </div>
+                <div class="inline">
+                    <p>Кв./Офис:</p>
+                    {{ form_additional_user.flat }}
+                </div>
+            </div>
+            </div>
+                <div class="row" style="margin: 30px 0 30px -15px">
+                <div class="col-xs-12">
+                    <button type="submit" id="send-personal-data" class="btn btn-info">Сохранить</button>
+                    <span style="display: none" id="loader">
+                        <i class="fa fa-spinner fa-pulse fa-1x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </span>
+                    <span style="display: none" id="loader-succefull">
+                        <i class="fa fa-check" style="color: limegreen" aria-hidden="true"></i>
+                    </span>
+                </div>
+                </div>
+       </form>
+
+{% endblock %}
