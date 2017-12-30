@@ -12,7 +12,7 @@ class AdditionalUser(models.Model):
     house = models.IntegerField('Номер дома', null=True, blank=True)
     building = models.IntegerField('Строение/Владение/Корпус', null=True, blank=True)
     flat = models.IntegerField('Номер квартиры/офиса', null=True, blank=True)
-    user = models.OneToOneField(User, verbose_name='Принадлежность', null=True, blank=True)
+    user = models.OneToOneField(User, verbose_name='Принадлежность', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return '%s' % self.user

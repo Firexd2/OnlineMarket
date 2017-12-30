@@ -6,7 +6,7 @@ from Products.models import Category
 
 def category_and_session(request):
     category_list = Category.objects.all()
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         basket = ElementBasket.objects.filter(user=request.user.pk)
         number_product_in_basket = sum([item.count for item in basket])
     else:

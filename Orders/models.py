@@ -4,7 +4,7 @@ from django.db import models
 from Products.models import Product
 
 class OrderItemProduct(models.Model):
-    product = models.ForeignKey(Product, verbose_name='Товар')
+    product = models.ForeignKey(Product, verbose_name='Товар', on_delete=models.CASCADE)
     count = models.IntegerField('Количество товара')
 
     def __str__(self):

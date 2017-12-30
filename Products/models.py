@@ -1,8 +1,6 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 from PIL import Image as Im
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 _MAX_SIZE = 150
 _MAX_SIZE_2 = 500
@@ -69,7 +67,7 @@ class Product(models.Model):
     availability = models.BooleanField('Доступность', default=True)
     sold = models.PositiveIntegerField('Продано', default=0)
     number = models.PositiveIntegerField('Количество в наличии')
-    settings = models.ForeignKey(SettingsProduct, verbose_name='Характеристики продукта')
+    settings = models.ForeignKey(SettingsProduct, verbose_name='Характеристики продукта', on_delete=models.CASCADE)
     description = models.TextField('Описание', default='', blank=True, null=True)
     date = models.DateField('Дата добавления товара', auto_now_add=True)
     name_url = models.CharField('URL', max_length=500, blank=True, null=True)
@@ -131,7 +129,7 @@ def directory_path(instance, filename):
 
 class ImageProduct(models.Model):
 
-    product = models.ForeignKey(Product, verbose_name='К какому товару причастны')
+    product = models.ForeignKey(Product, verbose_name='К какому товару причастны', on_delete=models.CASCADE)
     image = models.ImageField('Выбери файлы. Можно выбрать несколько', upload_to=directory_path)
     image_resize = models.CharField(max_length=1000, default='', blank=True)
 

@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from PersonalRoom.models import get_or_none
 from Products.models import Product
 from Orders.models import Order

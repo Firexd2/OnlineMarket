@@ -21,7 +21,7 @@
                 </thead>
                 {% for item in elementsBasket %}
 
-                    <form class="form-create-count" action="{% url 'change_count_in_basket' product_id=item.product.pk %}" method="POST">{% csrf_token %}
+                    <form class="form-create-count" action="{% url 'change_count_in_basket' %}" method="POST">{% csrf_token %}
                         <tbody>
                         <tr>
                             <td>
@@ -62,6 +62,7 @@
                                     <span class="minplus down minplus-basket"><span class="glyphicon glyphicon-minus" style="vertical-align: middle"></span></span><input class="input-count" name="count-in-basket" value="{{ item.count }}"><span class="minplus up minplus-basket"><span class="glyphicon glyphicon-plus" style="vertical-align: middle"></span></span>
                                     <button hidden class="button-create-count" type="submit"></button>
                                     <input hidden class="max-count-product" value="{{ item.product.number }}">
+                                    <input hidden name="id" value="{{ item.product.id }}">
                                 </div>
                             </td>
                             <td style="padding-top: 16px; font-size: 25px;">

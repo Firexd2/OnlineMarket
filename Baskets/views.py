@@ -1,52 +1,74 @@
 from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.views.generic.base import View
 from Baskets.models import ElementBasket
 from Products.models import Product
 
 
-def basket_delete(request):
-    if request.user.is_authenticated():
-        ElementBasket.objects.filter(product=request.POST['id'], user=request.user.id).delete()
-    else:
-        ElementBasket.objects.filter(product=request.POST['id'], session_id=request.session.session_key).delete()
-    return HttpResponse('ok')
+class BasketTemplateView(TemplateView):
+    template_name = 'basket.html'
+    operated_object = ElementBasket.objects.filter
+
+    def user_object(self):
+        return self.request.user.id
+
+    def kwargs_auth(self, **kwargs):
+        field_user = {}
+        if self.request.user.is_authenticated:
+            field_user['user'] = self.user_object()
+        else:
+            field_user['session_id'] = self.request.session.session_key
+        return field_user
+
+    def get_element_basket(self, **kwargs):
+        field_user = self.kwargs_auth(**kwargs)
+        return self.operated_object(product=self.request.POST['id'], **field_user)
+
+    def get_context_data(self, **kwargs):
+        context = super(BasketTemplateView, self).get_context_data(**kwargs)
+        field_user = self.kwargs_auth(**kwargs)
+        context['elementsBasket'] = self.operated_object(**field_user)
+        return context
 
 
-def change_count_in_basket(request, product_id):
-    if request.user.is_authenticated():
-        ElementBasket.objects.filter(product=product_id,
-                                     user=request.user.id).update(count=request.POST['count-in-basket'])
-    else:
-        ElementBasket.objects.filter(product=product_id,
-                                     session_id=request.session.session_key).update(count=request.POST['count-in-basket'])
-    return HttpResponse('ok')
+class BasketView(BasketTemplateView, View):
+    pass
 
 
-def basket(request):
-    if request.user.is_authenticated():
-        elementsBasket = ElementBasket.objects.filter(user=request.user.pk)
-    else:
-        elementsBasket = ElementBasket.objects.filter(session_id=request.session.session_key)
-    return render(request, 'basket.html', locals())
+class BasketDelete(BasketView):
+
+    def post(self, request, *args, **kwargs):
+        self.get_element_basket(**kwargs).delete()
+        return HttpResponse('ok')
 
 
-def add_product_in_basket(request):
-    if request.user.is_authenticated():
-        ElementBasket(product=Product.objects.get(id=request.POST['id']),
-                      count=request.POST['count'], user=User.objects.get(id=request.user.pk)).save()
-    else:
-        ElementBasket(product=Product.objects.get(id=request.POST['id']),
-                      count=request.POST['count'], session_id=request.session.session_key).save()
-    return HttpResponse('ok')
+class BasketCount(BasketView):
+
+    def post(self, request, *args, **kwargs):
+        self.get_element_basket(**kwargs).update(count=self.request.POST['count-in-basket'])
+        return HttpResponse('ok')
 
 
-def get_ids_product_in_basket(request):
-    data = {}
-    if request.user.is_authenticated():
-        list_ids = [item.product.pk for item in ElementBasket.objects.filter(user=request.user.pk)]
-    else:
-        list_ids = [item.product.pk for item in ElementBasket.objects.filter(session_id=request.session.session_key)]
-    for i in list_ids:
-        data[i] = ''
-    return JsonResponse(data)
+class BasketAdd(BasketView):
+    operated_object = ElementBasket
+
+    def user_object(self):
+        return User.objects.get(id=self.request.user.id)
+
+    def post(self, request, *args, **kwargs):
+        field_user = self.kwargs_auth(**kwargs)
+        self.operated_object(**field_user, product=Product.objects.get(id=self.request.POST['id']),
+                             count=self.request.POST['count']).save()
+        return HttpResponse('ok')
+
+
+class BasketGet(BasketView):
+
+    def get(self, request, *args, **kwargs):
+        data = {}
+        field_user = self.kwargs_auth(**kwargs)
+        list_ids = [item.product.pk for item in self.operated_object(**field_user)]
+        for i in list_ids:
+            data[i] = ''
+        return JsonResponse(data)

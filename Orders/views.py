@@ -1,6 +1,7 @@
 from django.forms import model_to_dict
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
+
 from Baskets.models import ElementBasket
 from Orders.forms import *
 from PersonalRoom.models import AdditionalUser, get_or_none
@@ -13,7 +14,7 @@ def order(request):
 
     form_order = OrderForm(request.POST or None, initial=additional_user)
 
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         products = ElementBasket.objects.filter(user=request.user.id)
     else:
         products = ElementBasket.objects.filter(session_id=request.session.session_key)
@@ -21,7 +22,7 @@ def order(request):
     if request.POST:
         if form_order.is_valid() and products.count() > 0:
             _order = form_order.save(commit=False)
-            if request.user.is_authenticated():
+            if request.user.is_authenticated:
                 _order.username = request.user.username
             _order.save()
             for item in products:

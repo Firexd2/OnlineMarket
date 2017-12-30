@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 {% load staticfiles %}
 {% block scripts %}
     <script src="{% static '../static/js/order.js' %}"></script>
@@ -14,30 +15,30 @@
              <h3><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h3>
 
             <p>Ваше имя: <span class="star">*</span></p>
-            {{ form_order.first_name }}
+            {{ form_order.first_name|add_class:'form-control' }}
             <p>Ваша фамилия: <span class="star">*</span></p>
-            {{ form_order.last_name }}
+            {{ form_order.last_name|add_class:'form-control' }}
             <p>Ваш номер телефона: <span class="star">*</span></p>
-            {{ form_order.phone }}
+            {{ form_order.phone|attr:'class:form-control'|attr:'id:phone-order' }}
              {{ form_order.phone.errors }}
             </div>
             <div class="col-xs-6">
                 <h3><i class="fa fa-map-marker" aria-hidden="true"></i> Адрес доставки</h3>
                 <p>Город: <span class="star">*</span></p>
-                {{ form_order.city }}
+                {{ form_order.city|attr:'class:form-control'|attr:'id:city' }}
                 <p>Улица: <span class="star">*</span></p>
-                {{ form_order.street }}
+                {{ form_order.street|attr:'class:form-control'|attr:'id:street' }}
                 <div class="inline">
                     <p>Дом: <span class="star">*</span></p>
-                    {{ form_order.house }}
+                    {{ form_order.house|attr:'class:form-control'|attr:'id:house' }}
                 </div>
                 <div class="inline">
                     <p>Стр.:</p>
-                    {{ form_order.building }}
+                    {{ form_order.building|attr:'class:form-control'|attr:'id:building' }}
                 </div>
                 <div class="inline">
                     <p>Кв./Офис: <span class="star">*</span></p>
-                    {{ form_order.flat }}
+                    {{ form_order.flat|attr:'class:form-control'|attr:'id:flat' }}
                 </div>
             </div>
             </div>
@@ -210,7 +211,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <h3><i class="fa fa-commenting-o" aria-hidden="true"></i> Комментарий к заказу</h3>
-                    {{ form_order.comment }}
+                    {{ form_order.comment|add_class:'form-control textarea-order'|attr:'rows:5' }}
                 </div>
             </div>
             <div class="row" style="margin: 30px 0 30px -15px">
