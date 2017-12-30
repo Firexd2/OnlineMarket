@@ -3,9 +3,11 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from Authentication.validator import validate_email_on_unicum
 
+#validators=[validate_email_on_unicum]
+
 
 class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(max_length=200, validators=[validate_email_on_unicum],
+    email = forms.EmailField(max_length=200,
                              help_text='Будет отправлено письмо для подтверждения почты')
 
     class Meta:

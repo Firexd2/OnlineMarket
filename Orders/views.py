@@ -1,7 +1,6 @@
 from django.forms import model_to_dict
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
-
 from Baskets.models import ElementBasket
 from Orders.forms import *
 from PersonalRoom.models import AdditionalUser, get_or_none
@@ -37,24 +36,24 @@ def order(request):
 
 def repeat_order(request, id):
 
-    order = Order.objects.get(id=id)
-    form_order = OrderForm(request.POST or None, initial=model_to_dict(order))
-    products = order.products.all()
+    _order = Order.objects.get(id=id)
+    form_order = OrderForm(request.POST or None, initial=model_to_dict(_order))
+    products = _order.products.all()
 
     if request.is_ajax():
-        logistic = order.logistic
-        payment = order.payment
+        logistic = _order.logistic
+        payment = _order.payment
         data = {'logistic': logistic, 'payment': payment}
         return JsonResponse(data)
 
     if request.POST:
         if form_order.is_valid():
-            order = form_order.save(commit=False)
-            order.status = 'processed'
-            order.username = request.user.username
-            order.save()
+            _order = form_order.save(commit=False)
+            _order.status = 'processed'
+            _order.username = request.user.username
+            _order.save()
         for item in products:
-            order.products.add(item)
+            _order.products.add(item)
         return render(request, 'order_success.html', locals())
 
     return render(request, 'order.html', locals())

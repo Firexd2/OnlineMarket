@@ -10,14 +10,18 @@ from PersonalRoom.forms import FormAdditionalUser, AdditionalUser, FavoritesProd
 
 @login_required
 def personal_room(request):
-
     orders = Order.objects.filter(username=request.user)
-
     return render(request, 'personal_room.html', locals())
+
+
+@login_required
+def favorites(request):
+    products_in_favorites = get_or_none(FavoritesProducts, user=request.user)
+    return render(request, 'favorites.html', locals())
+
 
 @login_required
 def profile(request):
-
     try:
         additional_user = AdditionalUser.objects.get(user=request.user.id)
     except ObjectDoesNotExist:
@@ -31,33 +35,16 @@ def profile(request):
             form.save()
             if request.is_ajax():
                 return HttpResponse('ok')
-
     return render(request, 'profile.html', locals())
 
 
-@login_required
-def favorites(request):
-    products_in_favorites = get_or_none(FavoritesProducts, user=request.user)
-    return render(request, 'favorites.html', locals())
-
-
 def add_to_favorites(request):
-
-    userObject, b = FavoritesProducts.objects.get_or_create(user=request.user)
-    userObject.products.add(Product.objects.get(id=request.POST['id']))
+    user_object, b = FavoritesProducts.objects.get_or_create(user=request.user)
+    user_object.products.add(Product.objects.get(id=request.POST['id']))
     return HttpResponse('ok')
 
 
 def remove_to_favorites(request):
-
-    userObject = FavoritesProducts.objects.get(user=request.user)
-    userObject.products.remove(Product.objects.get(id=request.POST['id']))
-
+    user_object = FavoritesProducts.objects.get(user=request.user)
+    user_object.products.remove(Product.objects.get(id=request.POST['id']))
     return HttpResponse('ok')
-
-
-
-
-
-
-

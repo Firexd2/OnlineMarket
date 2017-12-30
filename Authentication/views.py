@@ -1,7 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
@@ -10,6 +9,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import FormView, TemplateView
 from Authentication.forms import RegistrationForm
 from Authentication.tokens import account_activation_token
+from Core.tasks import send_verification_email
 
 
 class RegisterFormView(FormView):
@@ -23,8 +23,7 @@ class RegisterFormView(FormView):
         message = create_message(self.request, user)
         mail_subject = 'Активация аккаунта в интернет-магазине'
         to_email = form.cleaned_data.get('email')
-        email = EmailMessage(mail_subject, message, to=[to_email])
-        email.send()
+        send_verification_email.delay(to_email, message, mail_subject)
         return redirect('info_send_email')
 
 
@@ -59,7 +58,7 @@ def create_message(request, user):
     message = render_to_string('acc_active_email.html', {
         'user': user,
         'domain': current_site.domain,
-        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
         'token': account_activation_token.make_token(user),
     })
 

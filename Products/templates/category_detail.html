@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block scripts %}
+    <title>{{ category.name }}</title>
     <script src="{% static '../static/js/product.js' %}"></script>
 {% endblock %}
 {% block information %}

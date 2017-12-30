@@ -15,7 +15,6 @@
             {% else %}
                 <div class="price-product">{{ product.price }} руб.</div>
             {% endif %}
-
             <div class="icon-product">
                 {% if '0' in product.icon_value %}
                     <div class="icon-product-item new">
@@ -34,7 +33,6 @@
                 {% endif %}
             </div>
         </div>
-
         <form class="form-product" method="POST" action="/basket/add_product_in_basket">{% csrf_token %}
             <input name="id" hidden type="text" value="{{ product.id }}">
             <div class="add-product-basket">

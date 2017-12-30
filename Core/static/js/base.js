@@ -11,13 +11,6 @@ $(document).ready(function() {
             $('#count-price, #hide-basket-total').text(data.total_amount + ' р.');
         })}
 
-    $('#logo').on('mouseover', function () {
-        $('.slogan').css({'color': 'green'});
-
-    });
-    $('#logo').on('mouseout', function () {
-        $('.slogan').css({'color': '#ffb801'});
-    });
 
     $('.change-color').on('mouseover', function () {
         $(this).find('.fa').css({'color': '#ffb812', 'transition': '0.3s'})

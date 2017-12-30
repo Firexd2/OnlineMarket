@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block scripts %}
+    <title>{{ product.name }}</title>
     <script src="{% static '../static/js/product-page.js' %}"></script>
     <script src="{% static '../static/js/product.js' %}"></script>
 {% endblock %}
-
 {% block content %}
     <div class="row">
         <div class="col-xs-6">
@@ -51,7 +51,6 @@
                     <p><b>{{ product.price }}</b> руб.</p>
                 </div>
             {% endif %}
-
             <form class="form-product" method="POST" action="/basket/add_product_in_basket">{% csrf_token %}
                 <input name="id" hidden type="text" value="{{ product.id }}">
                 <div class="add-product-basket detail-product">
@@ -70,7 +69,6 @@
                             <p>Нравится товар?</p>
                             <button type="button" class="btn btn-success btn-add-fav">+ в избранное</button>
                         </div>
-
                     {% else %}
                         <div class="add-basket product-detail">
                             <div class="add-to-favorites-none btn-information" id="{{ product.id }}-{{ user }}">

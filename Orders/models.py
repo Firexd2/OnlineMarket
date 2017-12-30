@@ -10,6 +10,10 @@ class OrderItemProduct(models.Model):
     def __str__(self):
         return '%s, %s' % (self.product, self.count)
 
+    class Meta:
+        verbose_name = 'Элемент заказа (продукты и их количество)'
+        verbose_name_plural = 'Элементы заказа (продукты и их количество)'
+
 
 
 class Order(models.Model):
@@ -36,5 +40,9 @@ class Order(models.Model):
 
     def __str__(self):
         return '%s %s' % (self.last_name, self.phone)
+
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
 
 

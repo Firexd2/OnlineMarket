@@ -2,6 +2,7 @@ from django import forms
 from django.forms.widgets import *
 from .models import *
 
+
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order

@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
 
-class PersonalroomConfig(AppConfig):
+class PersonalRoomConfig(AppConfig):
     name = 'PersonalRoom'
+    verbose_name = 'Личный кабинет'

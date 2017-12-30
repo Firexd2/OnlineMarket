@@ -11,3 +11,7 @@ class ElementBasket(models.Model):
 
     def __str__(self):
         return '%s, %s' % (self.product, self.count)
+
+    class Meta:
+        verbose_name = 'Элемент корзины'
+        verbose_name_plural = 'Элементы корзины'

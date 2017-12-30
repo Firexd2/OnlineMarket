@@ -169,16 +169,19 @@ body {
     top: 20px;
     left: 270px;
     font-size: 22px;
-    color: #ffb801;
-    text-shadow: 1px 1px 1px #a6a6a6;
+    color: #ffa40b;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.slogan:hover {
+    color: darkorange;
 }
 
 .head-info {
     position: absolute;
     top: 20px;
-    left: 390px;
+    left: 405px;
 }
 
 .head-info .phone {
@@ -273,14 +276,13 @@ body {
 }
 
 .menu-head-login a {
-    font-size: 17px;
+    font-size: 13px;
     color: grey;
     border-bottom: 1px dotted grey;
 }
 
 .menu-head-login a:hover {
     text-decoration: none;
-
 }
 
 .product {
@@ -346,8 +348,6 @@ body {
     text-align: center;
 }
 
-
-
 .precent {
     background: red;
     color: white;
@@ -362,7 +362,6 @@ body {
     background: #ffa809;
     color: white;
 }
-
 
 .input-count {
     font-size: 17px;
@@ -634,7 +633,6 @@ body {
 .inline {
     display: inline-block;
     margin-right: 18px;
-
 }
 
 .star {
@@ -674,7 +672,6 @@ body {
 
 .category-block:hover {
     background: #d7d7d7;
-
 }
 
 .category-block div {
@@ -735,8 +732,6 @@ body {
     background: rgba(9, 239, 0, 0.11);
     font-size: 16px;
 }
-
-
 
 #small-modal-window {
     position: absolute;
@@ -835,7 +830,3 @@ body {
 #hide-basket span {
     opacity: 0.7;
 }
-
-
-
-

@@ -17,12 +17,22 @@ class AdditionalUser(models.Model):
     def __str__(self):
         return '%s' % self.user
 
+    class Meta:
+        verbose_name = 'Дополнительная информация о пользователе'
+        verbose_name_plural = 'Дополнительная информация о пользователе'
+
+
 class FavoritesProducts(models.Model):
     products = models.ManyToManyField(Product, verbose_name='Товары')
     user = models.CharField('Пользователь', max_length=100)
 
     def __str__(self):
         return '%s' % self.user
+
+    class Meta:
+        verbose_name = 'Избранный товар'
+        verbose_name_plural = 'Избранные товары'
+
 
 def get_or_none(self, **kwargs):
     try:

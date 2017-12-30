@@ -72,12 +72,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'Core.context_processors.category_and_session',
+                'Core.context_processors.get_info_for_all_page',
             ],
         },
     },
 ]
-
 
 
 STATICFILES_DIRS = [
@@ -149,3 +148,11 @@ EMAIL_PORT = 587
 LOGIN_REDIRECT_URL = '/'
 
 LOGIN_URL = '/authentication/login/'
+
+# Redis settings
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = '6379'
+BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
+BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'

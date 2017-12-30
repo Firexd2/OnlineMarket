@@ -1,42 +1,33 @@
 <div class="head">
     <a id="logo" href="/"><div class="logo"></div>
-    <div class="slogan">Магазин<br>здорового<br>питания</div>
+        <div class="slogan">Магазин<br>здорового<br>питания</div>
     </a>
-
     <div class="head-info">
         <p class="phone">8 (800) 555-35-35</p>
-        <p class="change-color" style="margin: 0; font-size: 13px">(Звонок по России бесплатный)<br>
-        пн-пт: <b>9:00-21:00</b>, сб,вс: <b>11:00-21:00</b> <br>
+        <p class="change-color" style="margin: 0; font-size: 13px; line-height: 1.9">(Звонок по России бесплатный)<br>
+            пн-пт: <b>9:00-21:00</b>, сб,вс: <b>11:00-21:00</b> <br>
             <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@здоровая-еда.ком">info@здоровая-еда.ком</a>
         </p>
-
     </div>
-
+    <ul class="menu-head-login">
+        {% if user.is_anonymous %}
+            <li><a href="{{ url }}/authentication/register/"><i class="fa fa-user" aria-hidden="true"></i> Зарегистрироваться</a></li>
+            <li><a href="{{ url }}/personal_room/profile/"><i class="fa fa-key" aria-hidden="true"></i> Личный кабинет</a></li>
+            <li><a href="{{ url }}/authentication/login/"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a></li>
+        {% else %}
+            <li><span style="font-size: 15px">Вы вошли как </span><a href="{{ url }}/personal_room/profile/">{{ user }}</a></li>
+            <li><a href="{{ url }}/personal_room/"><i class="fa fa-key" aria-hidden="true"></i> Личный кабинет</a></li>
+            <li><a href="{{ url }}/authentication/logout"><i class="fa fa-sign-in" aria-hidden="true"></i> Выход</a></li>
+        {% endif %}
+    </ul>
     <div class="basket">
         <div class="basket-text">
             ВАША КОРЗИНА</div>
         <div class="basket-icon"></div>
-
         <div class="basket-info">
             <span class="basket-product">Товаров: <span class="count-for-basket" id="count">{{ number_product_in_basket }}</span></span>
             <span class="basket-price">На сумму: <span class="count-for-basket" id="count-price">{{ total_amount }} р.</span></span>
         </div>
         <div class="basket-order"><button onclick="location.href='/basket/';" class="btn btn-success">Оформить заказ</button></div>
-
     </div>
-
-    {% if user.is_anonymous %}
-        <ul class="menu-head-login">
-            <li><a href="{{ url }}/authentication/register/"><i class="fa fa-user" aria-hidden="true"></i> Зарегистрироваться</a></li>
-            <li><a href="{{ url }}/personal_room/profile/"><i class="fa fa-key" aria-hidden="true"></i> Личный кабинет</a></li>
-            <li><a href="{{ url }}/authentication/login/"><i class="fa fa-sign-in" aria-hidden="true"></i> Вход</a></li>
-        </ul>
-    {% else %}
-        <ul class="menu-head-login">
-            <li><span style="font-size: 15px">Вы вошли как </span><a href="{{ url }}/personal_room/profile/">{{ user }}</a></li>
-            <li><a href="{{ url }}/personal_room/"><i class="fa fa-key" aria-hidden="true"></i> Личный кабинет</a></li>
-            <li><a href="{{ url }}/authentication/logout"><i class="fa fa-sign-in" aria-hidden="true"></i> Выход</a></li>
-        </ul>
-    {% endif %}
-
 </div>

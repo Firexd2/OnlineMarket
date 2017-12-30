@@ -2,45 +2,45 @@
 {% load widget_tweaks %}
 {% load staticfiles %}
 {% block scripts %}
+    <title>Оформление заказа</title>
     <script src="{% static '../static/js/order.js' %}"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 {% endblock %}
 {% block content %}
-        <div class="order">
+    <div class="order">
         <h1>Оформление заказа</h1>
-            <hr>
+        <hr>
         <form name="contact-form" method="POST">{% csrf_token %}
             <div class="row">
-            <div class="col-xs-6">
-             <h3><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h3>
-
-            <p>Ваше имя: <span class="star">*</span></p>
-            {{ form_order.first_name|add_class:'form-control' }}
-            <p>Ваша фамилия: <span class="star">*</span></p>
-            {{ form_order.last_name|add_class:'form-control' }}
-            <p>Ваш номер телефона: <span class="star">*</span></p>
-            {{ form_order.phone|attr:'class:form-control'|attr:'id:phone-order' }}
-             {{ form_order.phone.errors }}
-            </div>
-            <div class="col-xs-6">
-                <h3><i class="fa fa-map-marker" aria-hidden="true"></i> Адрес доставки</h3>
-                <p>Город: <span class="star">*</span></p>
-                {{ form_order.city|attr:'class:form-control'|attr:'id:city' }}
-                <p>Улица: <span class="star">*</span></p>
-                {{ form_order.street|attr:'class:form-control'|attr:'id:street' }}
-                <div class="inline">
-                    <p>Дом: <span class="star">*</span></p>
-                    {{ form_order.house|attr:'class:form-control'|attr:'id:house' }}
+                <div class="col-xs-6">
+                    <h3><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h3>
+                    <p>Ваше имя: <span class="star">*</span></p>
+                    {{ form_order.first_name|add_class:'form-control' }}
+                    <p>Ваша фамилия: <span class="star">*</span></p>
+                    {{ form_order.last_name|add_class:'form-control' }}
+                    <p>Ваш номер телефона: <span class="star">*</span></p>
+                    {{ form_order.phone|attr:'class:form-control'|attr:'id:phone-order' }}
+                    {{ form_order.phone.errors }}
                 </div>
-                <div class="inline">
-                    <p>Стр.:</p>
-                    {{ form_order.building|attr:'class:form-control'|attr:'id:building' }}
+                <div class="col-xs-6">
+                    <h3><i class="fa fa-map-marker" aria-hidden="true"></i> Адрес доставки</h3>
+                    <p>Город: <span class="star">*</span></p>
+                    {{ form_order.city|attr:'class:form-control'|attr:'id:city' }}
+                    <p>Улица: <span class="star">*</span></p>
+                    {{ form_order.street|attr:'class:form-control'|attr:'id:street' }}
+                    <div class="inline">
+                        <p>Дом: <span class="star">*</span></p>
+                        {{ form_order.house|attr:'class:form-control'|attr:'id:house' }}
+                    </div>
+                    <div class="inline">
+                        <p>Стр.:</p>
+                        {{ form_order.building|attr:'class:form-control'|attr:'id:building' }}
+                    </div>
+                    <div class="inline">
+                        <p>Кв./Офис: <span class="star">*</span></p>
+                        {{ form_order.flat|attr:'class:form-control'|attr:'id:flat' }}
+                    </div>
                 </div>
-                <div class="inline">
-                    <p>Кв./Офис: <span class="star">*</span></p>
-                    {{ form_order.flat|attr:'class:form-control'|attr:'id:flat' }}
-                </div>
-            </div>
             </div>
             <hr>
             <div class="row">
@@ -84,7 +84,6 @@
                         </tr>
                         </tbody>
                     </table>
-
                 </div>
             </div>
             <hr>
@@ -114,7 +113,7 @@
                             <td>Вы можете оплатить Ваш заказ наличными деньгами или банковской картой
                                 в Пунктах самовывоза или курьеру при получении заказа.</td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td width="400px">
                                 <div style="display: inline-block">
                                     <input type="radio" name="payment" value="imposed" required="" id="id_payment_1">
@@ -179,20 +178,18 @@
                         {% for item in products %}
                             <tr>
                                 <td>{{ item.product.name }}</td>
-                            {% if item.product.sail_procent %}
-                                <td>{{ item.product.sail_procent }} %</td>
-                            {% else %}
-                            <td>0 %</td>
-                            {% endif %}
+                                {% if item.product.sail_procent %}
+                                    <td>{{ item.product.sail_procent }} %</td>
+                                {% else %}
+                                    <td>0 %</td>
+                                {% endif %}
                                 <td class="count-amount">{{ item.count }}</td>
                                 {% if item.product.new_price %}
                                     <td><span><b class="price-amount">{{ item.product.new_price }}</b></span> руб.</td>
                                 {% else %}
                                     <td><span><b class="price-amount">{{ item.product.price }}</b></span> руб.</td>
                                 {% endif %}
-
                             </tr>
-
                         {% endfor %}
                         <tr>
                             <td colspan="3">Доставка</td>
@@ -219,12 +216,6 @@
                     <button style="height: 40px; width: 180px; font-size: 18px" type="submit" class="btn btn-info">Оформить заказ</button>
                 </div>
             </div>
-
-
-
-
         </form>
-
-        </div>
-
+    </div>
 {% endblock %}

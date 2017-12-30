@@ -1,6 +1,8 @@
 {% extends 'personal_room.html' %}
+{% load widget_tweaks %}
 {% load staticfiles %}
 {% block scripts %}
+    <title>Настройки профиля</title>
     <script src="{% static '../static/js/order.js' %}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
     <script src="{% static '../static/js/personal_room.js' %}"></script>
@@ -17,53 +19,50 @@
         <button onclick="location.href='/authentication/password_reset/'" class="btn btn-danger">Сбросить пароль</button>
     </p>
     <br>
-
-        <h5 style="opacity: 0.5;">Если вы заполните поля, представленные ниже,
-            то при заказах контактные и адресные поля будут заполнены автоматически.</h5>
-       <form name="contact-form" class="form-personal-data" method="POST">{% csrf_token %}
-            <div class="row">
+    <h5 style="opacity: 0.5;">Если вы заполните поля, представленные ниже,
+        то при заказах контактные и адресные поля будут заполнены автоматически.</h5>
+    <form name="contact-form" class="form-personal-data" method="POST">{% csrf_token %}
+        <div class="row">
             <div class="col-xs-6">
-             <h4><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h4>
-
-            <p>Ваше имя:</p>
-            {{ form_additional_user.first_name }}
-            <p>Ваша фамилия:</p>
-            {{ form_additional_user.last_name }}
-            <p>Ваш номер телефона:</p>
-            {{ form_additional_user.phone }}
+                <h4><span style="font-size: 17px" class="glyphicon glyphicon-user"></span> Контактные данные</h4>
+                <p>Ваше имя:</p>
+                {{ form_additional_user.first_name|add_class:'form-control' }}
+                <p>Ваша фамилия:</p>
+                {{ form_additional_user.last_name|add_class:'form-control' }}
+                <p>Ваш номер телефона:</p>
+                {{ form_additional_user.phone|add_class:'form-control'|attr:'id:phone-order' }}
             </div>
             <div class="col-xs-6">
                 <h4><i class="fa fa-map-marker" aria-hidden="true"></i> Адрес доставки</h4>
                 <p>Город:</p>
-                {{ form_additional_user.city }}
+                {{ form_additional_user.city|add_class:'form-control'|attr:'id:city' }}
                 <p>Улица:</p>
-                {{ form_additional_user.street }}
+                {{ form_additional_user.street|add_class:'form-control'|attr:'id:street' }}
                 <div class="inline">
                     <p>Дом:</p>
-                    {{ form_additional_user.house }}
+                    {{ form_additional_user.house|add_class:'form-control'|attr:'id:house' }}
                 </div>
                 <div class="inline">
                     <p>Стр.:</p>
-                    {{ form_additional_user.building }}
+                    {{ form_additional_user.building|add_class:'form-control'|attr:'id:building' }}
                 </div>
                 <div class="inline">
                     <p>Кв./Офис:</p>
-                    {{ form_additional_user.flat }}
+                    {{ form_additional_user.flat|add_class:'form-control'|attr:'id:flat' }}
                 </div>
             </div>
-            </div>
-                <div class="row" style="margin: 30px 0 30px -15px">
-                <div class="col-xs-12">
-                    <button type="submit" id="send-personal-data" class="btn btn-info">Сохранить</button>
-                    <span style="display: none" id="loader">
+        </div>
+        <div class="row" style="margin: 30px 0 30px -15px">
+            <div class="col-xs-12">
+                <button type="submit" id="send-personal-data" class="btn btn-info">Сохранить</button>
+                <span style="display: none" id="loader">
                         <i class="fa fa-spinner fa-pulse fa-1x fa-fw"></i>
                         <span class="sr-only">Loading...</span>
                     </span>
-                    <span style="display: none" id="loader-succefull">
+                <span style="display: none" id="loader-succefull">
                         <i class="fa fa-check" style="color: limegreen" aria-hidden="true"></i>
                     </span>
-                </div>
-                </div>
-       </form>
-
+            </div>
+        </div>
+    </form>
 {% endblock %}

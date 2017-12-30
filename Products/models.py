@@ -6,6 +6,7 @@ _MAX_SIZE = 150
 _MAX_SIZE_2 = 500
 UPLOAD_IMG_PRODUCTS = 'products/'
 
+
 class SettingsProduct(models.Model):
     proteins = models.CharField('Белки', max_length=30, blank=True, null=True)
     fats = models.CharField('Жиры', max_length=30, blank=True, null=True)
@@ -24,6 +25,10 @@ class SettingsProduct(models.Model):
 
     def all(self):
         return [[field.verbose_name, self.__dict__[field.name]] for field in self._meta.get_fields()[2:-1]]
+
+    class Meta:
+        verbose_name = 'Характеристика продукта'
+        verbose_name_plural = 'Характеристики продуктов'
 
 
 class Category(models.Model):
@@ -76,7 +81,6 @@ class Product(models.Model):
         return self.name
 
     def get_absolute_url(self):
-
         return reverse('detail_product', kwargs={'name_url': self.name_url})
 
     def icon_value(self):
@@ -92,7 +96,6 @@ class Product(models.Model):
             result += '1'
 
         return result
-
 
     def save(self, *args, **kwargs):
         dict_letters = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'ye', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
@@ -126,6 +129,7 @@ class Product(models.Model):
 
 def directory_path(instance, filename):
     return 'products/{0}/{1}'.format(instance.product.name, filename)
+
 
 class ImageProduct(models.Model):
 

@@ -2,8 +2,8 @@
 {% load staticfiles %}
 {% block scripts %}
     <script src="{% static '../static/js/basket.js' %}"></script>
+    <title>Корзина</title>
 {% endblock %}
-
 {% block middle %}
     <div class="col-xs-12">
         {% if elementsBasket %}
@@ -20,7 +20,6 @@
                 </tr>
                 </thead>
                 {% for item in elementsBasket %}
-
                     <form class="form-create-count" action="{% url 'change_count_in_basket' %}" method="POST">{% csrf_token %}
                         <tbody>
                         <tr>
@@ -35,7 +34,6 @@
                                 <div onclick="location.href='{{ item.product.get_absolute_url }}'" class="product-tittle-basket">
                                     {{ item.product.name }}
                                 </div>
-
                             </td>
                             <td class="sale" style="padding-top: 20px">
                                 {% if item.product.sail_procent %}
@@ -68,11 +66,9 @@
                             <td style="padding-top: 16px; font-size: 25px;">
                                 <i id="{{ item.product.id }}" class="delete-element fa fa-times" aria-hidden="true"></i>
                             </td>
-
                         </tr>
                         </tbody>
                     </form>
-
                 {% endfor %}
             </table>
             <hr>
@@ -83,7 +79,6 @@
                 <p style="font-weight: bold">Итого cо скидкой: <span id="amount-price"></span> р.</p><br>
                 <button onclick="location.href='/order'" style="margin-top: 30px; float: right" type="button" class="btn btn-info">Оформить заказ</button>
             </div>
-
         {% else %}
             <div style="text-align: center">
             <img src="{{ url }}/media/image/empty-cart.jpg" alt="">
