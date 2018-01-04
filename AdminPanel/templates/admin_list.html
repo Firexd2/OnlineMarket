@@ -1,0 +1,25 @@
+{% extends 'admin_panel.html' %}
+{% load staticfiles %}
+{% block scripts %}
+    <script src="{% static '../static/js/admin-search.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h3>{{ title }}</h3>
+            <hr>
+            <form method="POST" id="search">
+                <input type="text" placeholder="Найти объекты...">
+                <button type="submit"></button>
+            </form>
+            <div id="pages">
+                Страницы:
+                <span></span>
+            </div>
+            <table style="width: 800px" class="table table-hover">
+                {% block table %}
+                {% endblock %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -10,4 +10,7 @@ class OrderForm(forms.ModelForm):
         widgets = {
             'payment': RadioSelect,
             'logistic': RadioSelect,
+            'house': TextInput,
+            'building': TextInput,
+            'flat': TextInput,
         }

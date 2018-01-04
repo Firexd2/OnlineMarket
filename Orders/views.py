@@ -1,15 +1,18 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.forms import model_to_dict
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
 from Baskets.models import ElementBasket
 from Orders.forms import *
-from PersonalRoom.models import AdditionalUser, get_or_none
+from PersonalRoom.models import AdditionalUser
 
 
 def order(request):
 
-    additional_user_or_none = get_or_none(AdditionalUser, user=request.user.id)
-    additional_user = model_to_dict(additional_user_or_none) if additional_user_or_none else None
+    try:
+        additional_user = model_to_dict(AdditionalUser.objects.get(user=request.user.id))
+    except ObjectDoesNotExist:
+        additional_user = None
 
     form_order = OrderForm(request.POST or None, initial=additional_user)
 
@@ -20,14 +23,14 @@ def order(request):
 
     if request.POST:
         if form_order.is_valid() and products.count() > 0:
-            _order = form_order.save(commit=False)
+            save_order = form_order.save(commit=False)
             if request.user.is_authenticated:
-                _order.username = request.user.username
-            _order.save()
+                save_order.username = request.user.username
+            save_order.save()
             for item in products:
                 order_product = OrderItemProduct(product=item.product, count=item.count)
                 order_product.save()
-                _order.products.add(order_product)
+                save_order.products.add(order_product)
             products.delete()
             return render(request, 'order_success.html', locals())
 
@@ -48,12 +51,12 @@ def repeat_order(request, id):
 
     if request.POST:
         if form_order.is_valid():
-            _order = form_order.save(commit=False)
-            _order.status = 'processed'
-            _order.username = request.user.username
-            _order.save()
+            save_order = form_order.save(commit=False)
+            save_order.status = 'processed'
+            save_order.username = request.user.username
+            save_order.save()
         for item in products:
-            _order.products.add(item)
+            save_order.products.add(item)
         return render(request, 'order_success.html', locals())
 
     return render(request, 'order.html', locals())

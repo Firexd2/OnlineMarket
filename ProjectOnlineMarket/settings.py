@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Authentication',
     'PersonalRoom',
     'widget_tweaks',
+    'AdminPanel',
 ]
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']

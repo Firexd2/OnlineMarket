@@ -1,0 +1,25 @@
+{% extends 'admin_list.html' %}
+{% block table %}
+    <thead>
+    <tr>
+        <th>Дата</th>
+        <th>Номер заказа</th>
+        <th>Фамилия</th>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Статус</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for object in objects %}
+        <tr class="table-item">
+            <td>{{ object.date }}</td>
+            <td>{{ object.id }}</td>
+            <td>{{ object.last_name }}</td>
+            <td>{{ object.first_name }}</td>
+            <td>{{ object.phone }}</td>
+            <td>{{ object.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+{% endblock %}

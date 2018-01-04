@@ -58,10 +58,6 @@ body {
     min-height: 600px;
 }
 
-.leftbar {
-
-}
-
 .nav li {
     font-size: 16px;
     border-bottom: 1px solid gainsboro;
@@ -830,3 +826,5 @@ body {
 #hide-basket span {
     opacity: 0.7;
 }
+
+
