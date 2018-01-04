@@ -31,6 +31,11 @@ def order(request):
                 order_product = OrderItemProduct(product=item.product, count=item.count)
                 order_product.save()
                 save_order.products.add(order_product)
+                product = item.product
+                product.number -= item.count
+                product.sold += item.count
+                product.save()
+
             products.delete()
             return render(request, 'order_success.html', locals())
 
@@ -38,7 +43,7 @@ def order(request):
 
 
 def repeat_order(request, id):
-
+    save_order = None
     _order = Order.objects.get(id=id)
     form_order = OrderForm(request.POST or None, initial=model_to_dict(_order))
     products = _order.products.all()

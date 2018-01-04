@@ -1,25 +1,27 @@
 {% extends 'admin_list.html' %}
 {% block table %}
-    <thead>
-    <tr>
-        <th>Дата</th>
-        <th>Номер заказа</th>
-        <th>Фамилия</th>
-        <th>Имя</th>
-        <th>Телефон</th>
-        <th>Статус</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for object in objects %}
-        <tr class="table-item">
-            <td>{{ object.date }}</td>
-            <td>{{ object.id }}</td>
-            <td>{{ object.last_name }}</td>
-            <td>{{ object.first_name }}</td>
-            <td>{{ object.phone }}</td>
-            <td>{{ object.status }}</td>
+    <table style="width: 800px" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Дата</th>
+            <th>Номер заказа</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Телефон</th>
+            <th>Статус</th>
         </tr>
-    {% endfor %}
-    </tbody>
+        </thead>
+        <tbody>
+        {% for object in objects %}
+            <tr class="table-item">
+                <td>{{ object.date }}</td>
+                <td>{{ object.id }}</td>
+                <td>{{ object.last_name }}</td>
+                <td>{{ object.first_name }}</td>
+                <td><b>{{ object.phone }}</b></td>
+                <td>{{ object.get_status_display }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

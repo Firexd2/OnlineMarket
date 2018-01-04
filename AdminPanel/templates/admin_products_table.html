@@ -1,0 +1,36 @@
+{% extends 'admin_list.html' %}
+{% block table %}
+    <table style="width: 1000px" class="table table-hover">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Количество на складе</th>
+            <th>Цена</th>
+            <th>Новая цена</th>
+            <th>Продано</th>
+            <th>Категории</th>
+            <th>Просмотр</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in objects %}
+            <tr class="table-item">
+                <td>{{ object.name }}</td>
+                <td><b>{{ object.number }}</b>  <span style="color: #7f7f7f">шт.</span></td>
+                <td>{{ object.price }} <span style="color: #7f7f7f">руб.</span></td>
+                {% if object.new_price %}
+                    <td>{{ object.new_price }} <span style="color: #7f7f7f">руб.</span></td>
+                {% else %}
+                    <td>---</td>
+                {% endif %}
+                <td>{{ object.sold }} шт.</td>
+                <td>{% for category in object.category.all %}
+                    {{ category }}<br>
+                    {% endfor %}
+                </td>
+                <td><input onclick="location.href='{{ object.get_absolute_url }}'" class="btn btn-block" value="Перейти" type="button"></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
