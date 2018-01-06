@@ -19,7 +19,8 @@ class OrderItemProduct(models.Model):
 class Order(models.Model):
     METHODS_LOG = (('mail', 'Почта'), ('courier', 'Курьер'), ('cdek', 'Сдэк'))
     METHODS_PAY = (('cash', 'Наличные'), ('imposed', 'Наложенный'), ('card', 'Карта'), ('non-cash', 'Безналичный'))
-    STATUS = (('processed', 'Обрабатывается'), ('preparation', 'Подготовка к отправке'), ('road', 'В дороге'), ('delivered', 'Доставлен'))
+    STATUS = (('processed', 'Обрабатывается'), ('preparation', 'Подготовка к отправке'),
+              ('road', 'В дороге'), ('delivered', 'Доставлен'))
 
     first_name = models.CharField('Ваше имя', max_length=100, default='')
     last_name = models.CharField('Ваша фамилия', max_length=100, default='')

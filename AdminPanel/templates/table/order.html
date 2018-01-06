@@ -1,6 +1,6 @@
-{% extends 'admin_list.html' %}
+{% extends 'table/base.html' %}
 {% block table %}
-    <table style="width: 800px" class="table table-hover">
+    <table style="width: 1000px" class="table table-hover">
         <thead>
         <tr>
             <th>Дата</th>
@@ -9,17 +9,22 @@
             <th>Имя</th>
             <th>Телефон</th>
             <th>Статус</th>
+            <th width="250">Управление</th>
         </tr>
         </thead>
         <tbody>
         {% for object in objects %}
-            <tr class="table-item">
+            <tr style="" class="table-item">
                 <td>{{ object.date }}</td>
                 <td>{{ object.id }}</td>
                 <td>{{ object.last_name }}</td>
                 <td>{{ object.first_name }}</td>
                 <td><b>{{ object.phone }}</b></td>
                 <td>{{ object.get_status_display }}</td>
+                <td>
+                    <input style="width: 120px;margin: 0" onclick="location.href='{% url 'detail_order' pk=object.pk %}'" class="btn-admin btn btn-block" value="Детализация" type="button">
+                    <input style="width: 100px;margin: 0" onclick="location.href='{% url 'update_order' pk=object.pk %}'" class="btn-admin btn btn-block" value="Обновить" type="button">
+                </td>
             </tr>
         {% endfor %}
         </tbody>

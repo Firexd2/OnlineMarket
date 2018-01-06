@@ -1,4 +1,4 @@
-{% extends 'admin_list.html' %}
+{% extends 'table/base.html' %}
 {% block table %}
     <table style="width: 1000px" class="table table-hover">
         <thead>
@@ -9,7 +9,7 @@
             <th>Новая цена</th>
             <th>Продано</th>
             <th>Категории</th>
-            <th>Просмотр</th>
+            <th width="250">Просмотр</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +28,10 @@
                     {{ category }}<br>
                     {% endfor %}
                 </td>
-                <td><input onclick="location.href='{{ object.get_absolute_url }}'" class="btn btn-block" value="Перейти" type="button"></td>
+                <td>
+                    <input style="width: 85px;margin: 0" onclick="location.href='{{ object.get_absolute_url }}'" class="btn-admin btn btn-block" value="На сайте" type="button">
+                    <input style="width: 110px;margin: 0" onclick="location.href='{% url 'detail_product_admin' pk=object.pk %}'" class="btn-admin btn btn-block" value="Детализация" type="button">
+                </td>
             </tr>
         {% endfor %}
         </tbody>
