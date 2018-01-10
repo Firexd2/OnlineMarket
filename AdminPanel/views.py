@@ -30,8 +30,3 @@ class DetailObjectAdmin(DetailView):
 class UpdateObjectAdmin(UpdateView):
     template_name = 'admin_create_object.html'
     success_url = '/admin_panel/'
-
-
-
-
-

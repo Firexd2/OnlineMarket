@@ -31,6 +31,10 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,11 +66,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Core.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -75,9 +79,31 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'Core.context_processors.get_info_for_all_page',
             ],
+            'loaders': [
+                'admin_tools.template_loaders.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader'
+            ]
         },
     },
 ]
+
+# Custom AdminPanel
+
+ADMIN_TOOLS_INDEX_DASHBOARD = {
+    'django.contrib.admin.site': 'Core.custom_admin.admin_dashboard.CustomIndexDashboard',
+    'Core.admin.admin_panel': 'Core.custom_admin.min_admin_dashboard.CustomIndexDashboard',
+}
+
+ADMIN_TOOLS_MENU = {
+    'django.contrib.admin.site': 'Core.custom_admin.admin_menu.CustomMenu',
+    'Core.admin.admin_panel': 'Core.custom_admin.min_admin_menu.CustomMenu',
+}
+
+# ADMIN_TOOLS_APP_INDEX_DASHBOARD = {
+#     'django.contrib.admin.site': 'Core.custom_admin.admin_dashboard.CustomAppIndexDashboard',
+#     'Core.admin.admin_panel': 'Core.custom_admin.min_admin_dashboard.CustomAppIndexDashboard',
+# }
 
 
 STATICFILES_DIRS = [
@@ -133,6 +159,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+
+PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 STATIC_URL = '/static/'
 

@@ -1,9 +1,22 @@
 from django.http import JsonResponse
 from Baskets.models import ElementBasket
 from Products.models import Category
+from .models import Visitation
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 
 def get_info_for_all_page(request):
+
+    Visitation.objects.update_or_create(ip=get_client_ip(request))
+
     category_list = Category.objects.all()
     if request.user.is_authenticated:
         basket = ElementBasket.objects.filter(user=request.user.pk)

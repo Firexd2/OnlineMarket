@@ -1,0 +1,9 @@
+{% extends "admin_tools/dashboard/module.html" %}
+{% block module_content %}
+    <div style="font-size: 13px; color: #616161">
+    <p>Новые заказы: <b style="color: red">{{ module.new }}</b></p>
+    <p>В дороге: <b style="color: darkgoldenrod">{{ module.road }}</b></p>
+    <p>Доставленные: <b style="color: green">{{ module.success }}</b></p>
+    <p>Общее количество: <b>{{ module.all }}</b></p>
+    </div>
+{% endblock %}
