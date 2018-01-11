@@ -18,7 +18,7 @@ except ImportError:
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 from admin_tools.utils import get_admin_site_name
-from Core.custom_admin.modules.stat import block
+from Core.custom_admin.modules.stat import modules as custom_modules
 
 
 class CustomIndexDashboard(Dashboard):
@@ -45,12 +45,12 @@ class CustomIndexDashboard(Dashboard):
             title=u'Статистика',
             display='tabs',
             children=[
-                block.StatOrderModule(),
-                modules.AppList(
-                    title='Applications',
-                    exclude=('django.contrib.*',)),
+                custom_modules.StatOrderModule(),
+                custom_modules.StatVisitedModule(),
+                custom_modules.StatProductsModule(),
             ]
         ))
+        self.children.append(custom_modules.NewOrdersModule())
 
     class Media:
         css = {'screen, projection':

@@ -1,0 +1,6 @@
+{% extends "admin_tools/dashboard/module.html" %}
+{% block module_content %}
+    {% for order in module.orders %}
+        <p><a href="/admin_panel/Orders/order/{{ order.pk }}/change/">{{ order }}</a></p>
+    {% endfor %}
+{% endblock %}

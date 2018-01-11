@@ -1,0 +1,9 @@
+{% extends "admin_tools/dashboard/module.html" %}
+{% block module_content %}
+    <div style="font-size: 13px; color: #616161">
+        <h4>Реализовано:</h4>
+        {% for product in module.top %}
+            <p>{{ product.name }} - <b>{{ product.sold }}</b> шт.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
