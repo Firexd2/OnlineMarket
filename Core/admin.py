@@ -18,4 +18,4 @@ class MixinSearchElements(admin.ModelAdmin):
               '/media/static/admin-search.js', )
 
 
-admin.site.register(models.Visitation)
+admin.site.register(models.Visitation, MixinSearchElements)

@@ -81,7 +81,7 @@ TEMPLATES = [
             'loaders': [
                 'admin_tools.template_loaders.Loader',
                 'django.template.loaders.filesystem.Loader',
-                'django.template.loaders.app_directories.Loader'
+                'django.template.loaders.app_directories.Loader',
             ]
         },
     },
@@ -98,6 +98,10 @@ ADMIN_TOOLS_MENU = {
     'django.contrib.admin.site': 'Core.custom_admin.admin_menu.CustomMenu',
     'Core.admin.admin_panel': 'Core.custom_admin.min_admin_menu.CustomMenu',
 }
+
+
+ADMIN_TOOLS_THEMING_CSS = '/static_for_admin/admin-theme.css'
+
 
 # ADMIN_TOOLS_APP_INDEX_DASHBOARD = {
 #     'django.contrib.admin.site': 'Core.custom_admin.admin_dashboard.CustomAppIndexDashboard',

@@ -4,8 +4,8 @@ from Products.models import Product
 
 
 class AdditionalUser(models.Model):
-    first_name = models.CharField('Ваше имя', max_length=100, null=True, blank=True)
-    last_name = models.CharField('Ваша фамилия', max_length=100, null=True, blank=True)
+    first_name = models.CharField('Имя', max_length=100, null=True, blank=True)
+    last_name = models.CharField('Фамилия', max_length=100, null=True, blank=True)
     phone = models.CharField('Номер телефона', max_length=16, null=True, blank=True)
     city = models.CharField('Город', max_length=100, null=True, blank=True)
     street = models.CharField('Улица', max_length=200, null=True, blank=True)
@@ -15,7 +15,7 @@ class AdditionalUser(models.Model):
     user = models.OneToOneField(User, verbose_name='Принадлежность', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return '%s' % self.user
+        return 'Запись принадлежит: %s' % self.user
 
     class Meta:
         verbose_name = 'Дополнительная информация о пользователе'
@@ -27,7 +27,7 @@ class FavoritesProducts(models.Model):
     user = models.CharField('Пользователь', max_length=100)
 
     def __str__(self):
-        return '%s' % self.user
+        return 'Продукты %s у %s' % (self.products.all(), self.user)
 
     class Meta:
         verbose_name = 'Избранный товар'

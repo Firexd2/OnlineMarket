@@ -6,4 +6,8 @@ class Visitation(models.Model):
     date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return '%s' % self.ip
+        return 'IP: %s' % self.ip
+
+    class Meta:
+        verbose_name = 'Посещение'
+        verbose_name_plural = 'Посещения'

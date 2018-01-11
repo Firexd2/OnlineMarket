@@ -56,9 +56,8 @@ class StatProductsModule(modules.DashboardModule):
 
 
 class NewOrdersModule(modules.DashboardModule):
-    orders = Order.objects.filter(status='processed')
-    count = orders.count()
-    title = u'Новые заказы (' + str(count) + ')'
+
+    title = u'Новые заказы'
 
     def is_empty(self):
         return self.orders.count() == 0
@@ -66,3 +65,5 @@ class NewOrdersModule(modules.DashboardModule):
     def __init__(self, **kwargs):
         super(NewOrdersModule, self).__init__(**kwargs)
         self.template = 'modules_for_admin/model/orders.html'
+        self.orders = Order.objects.filter(status='processed')
+        self.count = self.orders.count()

@@ -43,7 +43,7 @@ class ImageProductAdmin(admin.ModelAdmin):
 admin.site.register(models.Category, CategoryAdmin)
 admin.site.register(models.Product, ProductsAdmin)
 admin.site.register(models.ImageProduct, ImageProductAdmin)
-admin.site.register(models.SettingsProduct)
+admin.site.register(models.SettingsProduct, MixinSearchElements)
 
 admin_panel.register(models.Category, CategoryAdmin)
 admin_panel.register(models.Product, ProductsAdmin)

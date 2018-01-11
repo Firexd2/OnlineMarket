@@ -21,7 +21,7 @@ class SettingsProduct(models.Model):
     product_name = models.CharField('Название продукта', max_length=300, blank=True, null=True)
 
     def __str__(self):
-        return self.product_name
+        return 'Характеристики %s' % self.product_name
 
     def all(self):
         return [[field.verbose_name, self.__dict__[field.name]] for field in self._meta.get_fields()[2:-1]]
@@ -32,8 +32,8 @@ class SettingsProduct(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField('Название категории', max_length=40)
-    name_url = models.CharField('URL категории', max_length=50, default='')
+    name = models.CharField('Название', max_length=40)
+    name_url = models.CharField('URL', max_length=50, default='')
 
     def __str__(self):
         return '%s' % self.name
@@ -71,10 +71,10 @@ class Product(models.Model):
     weight = models.IntegerField('Вес', default=0)
     availability = models.BooleanField('Доступность', default=True)
     sold = models.PositiveIntegerField('Продано', default=0)
-    number = models.PositiveIntegerField('Количество в наличии')
-    settings = models.ForeignKey(SettingsProduct, verbose_name='Характеристики продукта', on_delete=models.CASCADE)
+    number = models.PositiveIntegerField('В наличии')
+    settings = models.ForeignKey(SettingsProduct, verbose_name='Характеристики', on_delete=models.CASCADE)
     description = models.TextField('Описание', default='', blank=True, null=True)
-    date = models.DateField('Дата добавления товара', auto_now_add=True)
+    date = models.DateField('Дата добавления', auto_now_add=True)
     name_url = models.CharField('URL', max_length=500, blank=True, null=True)
 
     def __str__(self):
@@ -123,8 +123,8 @@ class Product(models.Model):
         super(Product, self).save(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
 
 
 def directory_path(instance, filename):
@@ -133,8 +133,9 @@ def directory_path(instance, filename):
 
 class ImageProduct(models.Model):
 
-    product = models.ForeignKey(Product, verbose_name='К какому товару причастны', on_delete=models.CASCADE)
-    image = models.ImageField('Выбери файлы. Можно выбрать несколько', upload_to=directory_path)
+    product = models.ForeignKey(Product, verbose_name='Продукт', on_delete=models.CASCADE)
+    image = models.ImageField('Файлы', upload_to=directory_path,
+                              help_text='Можно выбрать несколько (Ctrl или выделение)')
     image_resize = models.CharField(max_length=1000, default='', blank=True)
 
     def __str__(self):
@@ -169,5 +170,5 @@ class ImageProduct(models.Model):
             image_big.save(filename)
 
     class Meta:
-        verbose_name = 'Фотографии товара'
-        verbose_name_plural = 'Фотографии товаров'
+        verbose_name = 'Фотографии продукта'
+        verbose_name_plural = 'Фотографии продуктов'

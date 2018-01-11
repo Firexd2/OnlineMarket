@@ -25,21 +25,6 @@ class CustomIndexDashboard(Dashboard):
     columns = 2
 
     def init_with_context(self, context):
-        site_name = get_admin_site_name(context)
-        # append a link list module for "quick links"
-        # self.children.append(modules_for_admin.LinkList(
-        #     _('Quick links'),
-        #     layout='inline',
-        #     draggable=False,
-        #     deletable=False,
-        #     collapsible=False,
-        #     children=[
-        #         [_('Return to site'), '/'],
-        #         [_('Change password'),
-        #          reverse('%s:password_change' % site_name)],
-        #         [_('Log out'), reverse('%s:logout' % site_name)],
-        #     ]
-        # ))
 
         # append an app list module for "Applications"
         self.children.append(modules.AppList(
@@ -55,13 +40,6 @@ class CustomIndexDashboard(Dashboard):
 
         # append a recent actions module
         self.children.append(modules.RecentActions(_('Recent Actions'), 5))
-
-        # append a feed module
-        self.children.append(modules.Feed(
-            _('Latest Django News'),
-            feed_url='http://www.djangoproject.com/rss/weblog/',
-            limit=5
-        ))
 
         # append another link list module for "support".
         self.children.append(modules.LinkList(
@@ -84,6 +62,10 @@ class CustomIndexDashboard(Dashboard):
                 },
             ]
         ))
+
+    class Media:
+        css = {'screen, projection':
+                   ('/static_for_admin/admin-panel.css',)}
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

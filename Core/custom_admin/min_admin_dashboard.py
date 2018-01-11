@@ -17,8 +17,7 @@ except ImportError:
     from django.core.urlresolvers import reverse
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
-from admin_tools.utils import get_admin_site_name
-from Core.custom_admin.modules.stat import modules as custom_modules
+from Core.custom_admin import modules as custom_modules
 
 
 class CustomIndexDashboard(Dashboard):
@@ -54,7 +53,7 @@ class CustomIndexDashboard(Dashboard):
 
     class Media:
         css = {'screen, projection':
-                   ('/static_for_admin/admin_panel.css',)}
+                   ('/static_for_admin/admin-panel.css',)}
 
 
 class CustomAppIndexDashboard(AppIndexDashboard):

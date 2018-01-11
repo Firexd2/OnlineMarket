@@ -1,6 +1,7 @@
 {% extends "admin_tools/dashboard/module.html" %}
 {% block module_content %}
     {% for order in module.orders %}
-        <p><a href="/admin_panel/Orders/order/{{ order.pk }}/change/">{{ order }}</a></p>
+        <p style="font-size: 12px"> <b style="color: red">~ </b> <a href="/admin_panel/Orders/order/{{ order.pk }}/change/">{{ order }}</a></p>
+        <hr>
     {% endfor %}
 {% endblock %}
