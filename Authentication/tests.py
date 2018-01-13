@@ -1,5 +1,4 @@
-from django.test import TestCase
-from django.test import Client
+from django.test import TestCase, Client
 from Authentication.validator import validate_email_on_unique
 from django.core.exceptions import ValidationError
 from Authentication.forms import RegistrationForm

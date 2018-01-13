@@ -58,7 +58,7 @@ class BasketAdd(BasketView):
 
     def post(self, request, *args, **kwargs):
         field_user = self.kwargs_auth(**kwargs)
-        self.operated_object(**field_user, product=Product.objects.get(id=self.request.POST['id']),
+        self.operated_object(**field_user, product_id=self.request.POST['id'],
                              count=self.request.POST['count']).save()
         return HttpResponse('ok')
 
