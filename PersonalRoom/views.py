@@ -10,7 +10,7 @@ from PersonalRoom.forms import FormAdditionalUser, AdditionalUser, FavoritesProd
 
 @login_required
 def personal_room(request):
-    orders = Order.objects.filter(username=request.user)
+    orders = Order.objects.filter(username=request.user)[::-1]
     return render(request, 'personal_room.html', locals())
 
 

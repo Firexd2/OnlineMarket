@@ -68,6 +68,6 @@ def repeat_order(request, id):
 
 
 def remove_order(request):
-    if request.is_ajax():
+    if request.POST:
         Order.objects.get(id=request.POST['id']).delete()
     return HttpResponse('ok')
