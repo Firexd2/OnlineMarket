@@ -1,0 +1,6 @@
+django==2.0
+Pillow==4.3.0
+Celery==3.1.24
+django-admin-tools==0.8.1
+django-widget-tweaks==1.4.1
+redis==2.10.6
