@@ -79,8 +79,8 @@
                         {% endblock %}
                         <div class="col-md-12">
                             <div class="content">
-                                <div class="row">
-                                    {% for product in products_list %}
+                                <div id="product-list" class="row">
+                                    {% for product in products %}
                                         {% include 'products_list.html' %}
                                     {% endfor %}
                                 </div>

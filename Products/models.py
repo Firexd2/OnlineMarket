@@ -64,7 +64,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     name = models.CharField('Название', max_length=300, default='')
-    category = models.ManyToManyField(Category, verbose_name='Категория')
+    category = models.ManyToManyField(Category, related_name='category', verbose_name='Категория')
     price = models.IntegerField('Цена', default=0)
     new_price = models.IntegerField('Новая цена', blank=True, null=True)
     sail_procent = models.IntegerField('Скидка', blank=True, null=True)

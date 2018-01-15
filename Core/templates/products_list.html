@@ -1,4 +1,4 @@
-<div class="col-xs-4" style="margin-bottom: 26px">
+<div class="col-xs-4 products" style="margin-bottom: 26px">
     <div class="product">
         <div onclick="location.href='{{ product.get_absolute_url }}'">
             <div class="tittle-product">{{ product.name }}</div>
@@ -18,12 +18,12 @@
             <div class="icon-product">
                 {% if '0' in product.icon_value %}
                     <div class="icon-product-item new">
-                        <div style="padding-top: 4px">new</div>
+                        <div id="marker-new" style="padding-top: 4px">new</div>
                     </div>
                 {% endif %}
                 {% if '1' in product.icon_value %}
                     <div class="icon-product-item hit">
-                        <div style="padding-top: 4px">Hit</div>
+                        <div id="marker-hit" style="padding-top: 4px">Hit</div>
                     </div>
                 {% endif %}
                 {% if product.new_price %}

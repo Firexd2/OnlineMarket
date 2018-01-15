@@ -88,7 +88,59 @@ $(document).ready(function() {
 
     }
 
-    activeMenu()
+    activeMenu();
+
+    function show_new() {
+        var products = $('.products');
+        products.hide();
+        for (var i=0; i<products.length; i++) {
+            if (products.eq(i).find('#marker-new').length) {
+                products.eq(i).show()
+            }
+        }
+
+    }
+
+    function show_hit() {
+        var products = $('.products');
+        products.hide();
+        for (var i=0; i<products.length; i++) {
+            if (products.eq(i).find('#marker-hit').length) {
+                products.eq(i).show();
+            }
+        }
+    }
+
+    function switch_home() {
+        var button_new = $('#new');
+        var button_hit = $('#hit');
+
+        $('.products').hide();
+        show_new();
+
+        button_new.on('click', function () {
+            $('.switch').find('button').removeClass('switch-active');
+            show_new();
+            $('#new').addClass('switch-active')
+
+        });
+        button_hit.on('click', function () {
+            $('.switch').find('button').removeClass('switch-active');
+            show_hit();
+            $('#hit').addClass('switch-active')
+        })
+    }
+
+    if (document.location.pathname === '/') {
+        $('#product-list').before('<div class="row">\n' +
+            '<div class="switch">\n' +
+            '<button id="new" class="btn btn-default switch-active">Новые</button>\n' +
+            '<button id="hit" class="btn btn-default">Хит</button>\n' +
+            '</div>\n' +
+            '</div>');
+
+        switch_home()
+    }
 
 });
 

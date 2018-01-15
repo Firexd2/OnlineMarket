@@ -9,7 +9,7 @@ def detail_product(request, name_url):
 
 def category_detail(request, category_name_url):
     category = Category.objects.get(name_url=category_name_url)
-    products_list = Product.objects.filter(category=category.id)
+    products = Product.objects.filter(category=category.id)
     return render(request, 'category_detail.html', locals())
 
 
