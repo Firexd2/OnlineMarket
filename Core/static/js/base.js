@@ -6,11 +6,9 @@ $(document).ready(function() {
 
     function get_basket() {
         $.get("/basket/get_data_basket", function (data) {
-
             $('#count, #hide-basket-count').text(data.number_product_in_basket);
             $('#count-price, #hide-basket-total').text(data.total_amount + ' р.');
         })}
-
 
     $('.change-color').on('mouseover', function () {
         $(this).find('.fa').css({'color': '#ffb812', 'transition': '0.3s'})
@@ -63,7 +61,6 @@ $(document).ready(function() {
         });
     }
 
-
     $(window).scroll(function () {
         if (document.location.pathname === '/') {
             if ($(this).scrollTop() > 150) {
@@ -85,7 +82,6 @@ $(document).ready(function() {
                 cur_li.find('i').attr('style', 'color:#ffb812')
             }
         }
-
     }
 
     activeMenu();
@@ -98,7 +94,6 @@ $(document).ready(function() {
                 products.eq(i).show()
             }
         }
-
     }
 
     function show_hit() {
@@ -122,7 +117,6 @@ $(document).ready(function() {
             $('.switch').find('button').removeClass('switch-active');
             show_new();
             $('#new').addClass('switch-active')
-
         });
         button_hit.on('click', function () {
             $('.switch').find('button').removeClass('switch-active');
@@ -142,5 +136,40 @@ $(document).ready(function() {
         switch_home()
     }
 
-});
+    $('#search').on('input', function () {
+        var window_result = $('#result-search');
+        window_result.find('p').children().remove();
+        var position = $(this).offset();
+        var input = $('#search').val().toLowerCase();
+        var path;
+        var result;
+        var n;
+        window_result.css({'top': position.top + 35, 'left': position.left});
+        $.ajax({
+            type: 'POST',
+            url: '/search/',
+            data: {'input': input, 'csrfmiddlewaretoken': getCookie('csrftoken')},
+            dataType: 'json',
+            success: function (res) {
+                if (!($.isEmptyObject(res))) {
+                    for (var key in res) {
+                        result = res[key][0].toLowerCase();
+                        n = result.search(input);
+                        result = res[key][0].slice(0,n) + '<span style="background:yellow">' + res[key][0].slice(n,n+input.length) + '</span>' + res[key][0].slice(n+input.length);
+                        path = '/product/' + res[key][1] + '/';
+                        window_result.find('p').append('<a href="' + path +'" class="search-item">' + result + '</a>')
+                    }
+                } else {
+                    window_result.find('p').append('<p style="color:darkgrey" class="search-item">Ничего не найдено</p>')
+                }
+            }
+        });
+        window_result.show()
+    });
 
+    $('body').click(function (event) {
+        if (!($('#search').is(event.target))) {
+            $('#result-search').hide()
+        }
+    });
+});

@@ -6,8 +6,11 @@
         <p class="phone">8 (800) 555-35-35</p>
         <p class="change-color" style="margin: 0; font-size: 13px; line-height: 1.9">(Звонок по России бесплатный)<br>
             пн-пт: <b>9:00-21:00</b>, сб,вс: <b>11:00-21:00</b> <br>
-            <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@здоровая-еда.ком">info@здоровая-еда.ком</a>
         </p>
+        <div style="margin-top: 5px">
+            <i class="fa fa-search" style="color: darkgrey" aria-hidden="true"></i>
+            <input id="search" style="display: inline-block" class="form-control" placeholder="Поиск продуктов..." type="text">
+        </div>
     </div>
     <ul class="menu-head-login">
         {% if user.is_anonymous %}

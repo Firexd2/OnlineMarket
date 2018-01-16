@@ -794,6 +794,31 @@ body {
     transition: 0.5s;
 }
 
+#result-search {
+    display: none;
+    position: absolute;
+    background: #ffffff;
+    width: 300px;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    border-radius: 3px;
+    box-shadow: 0 0 3px black;
+
+}
+
+.search-item {
+    border-top: 1px solid #cdcdcd;;
+    margin: 0;
+    padding: 5px 5px 5px 15px;
+    display: block;
+}
+
+.search-item:hover {
+    background: #efefef;
+    text-decoration: none;
+}
+
 #mask {
     background-color: rgba(0, 0, 0, 0.51);
     position:fixed;

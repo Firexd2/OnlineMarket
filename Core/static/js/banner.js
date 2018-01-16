@@ -20,11 +20,15 @@ $(document).ready(function() {
 
         function clickFunc() {
             if (!(mouse)) {
-                $('#button-slider-right').click()
+                right()
             }
         }
 
         $('#button-slider-right').on('click', function () {
+            right()
+        });
+
+        function right() {
             if (flag) {
                 return false
             }
@@ -39,7 +43,7 @@ $(document).ready(function() {
             });
             clearInterval(auto);
             auto = setInterval(clickFunc, interval);
-        });
+        }
 
         $('#button-slider-left').on('click', function () {
             if (flag) {

@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^catalog/$', views_product.category_list, name='category_list'),
     url(r'^catalog/(?P<category_name_url>\w*)/$', views_product.category_detail, name='category_detail'),
     url(r'^admin_tools/', include('admin_tools.urls')),
+    url(r'^search/$', views.search, name='search')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
