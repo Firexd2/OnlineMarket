@@ -1,5 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+
+from Core.models import SlideBanner
 from Products.models import *
 
 
@@ -8,6 +10,7 @@ def home(request):
     hit = 8
     new = 1
     products = Product.objects.filter(category__in=[hit, new]).distinct()[:20]
+    slides = SlideBanner.objects.all()[::-1]
     return render(request, 'home.html', locals())
 
 

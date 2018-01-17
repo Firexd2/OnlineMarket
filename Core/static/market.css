@@ -74,7 +74,7 @@ body {
 
 .banner {
     height: 350px;
-    width: 763px;
+    width: 760px;
     overflow: hidden;
     margin: 0 0 20px 0;
 }
@@ -89,7 +89,7 @@ body {
 .element-slider {
     float: left;
     height: 350px;
-    width: 763px;
+    width: 760px;
 }
 
 #button-slider-left, #button-slider-right {
@@ -109,11 +109,11 @@ body {
 }
 
 #button-slider-left {
-    left: 1px;
+    left: 2px;
 }
 
 #button-slider-right {
-    right: 2px;
+    right: 3px;
 }
 
 #button-slider-right span, #button-slider-left span {
@@ -192,7 +192,7 @@ body {
     height: 130px;
     box-shadow: 0 0 4px 1px #b0b0b0;
     top: 5px;
-    right: 20px;
+    right: 17px;
     font-size: 20px;
     padding: 0 20px 0 0;
     background: linear-gradient(to bottom, #fffffa 0%, #eaeae5 100%);

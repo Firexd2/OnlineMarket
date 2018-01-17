@@ -19,3 +19,5 @@ class MixinSearchElements(admin.ModelAdmin):
 
 
 admin.site.register(models.Visitation, MixinSearchElements)
+admin.site.register(models.SlideBanner)
+admin_panel.register(models.SlideBanner)

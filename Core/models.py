@@ -11,3 +11,15 @@ class Visitation(models.Model):
     class Meta:
         verbose_name = 'Посещение'
         verbose_name_plural = 'Посещения'
+
+
+class SlideBanner(models.Model):
+    slide = models.ImageField('Загрузка нового слайда', upload_to='banner',
+                              help_text='ВНИМАНИЕ! Для корректного отображения необходимо загружать изображения 760x350')
+
+    def __str__(self):
+        return str(self.slide)
+
+    class Meta:
+        verbose_name = 'Слайд баннера'
+        verbose_name_plural = 'Слайды баннера'
