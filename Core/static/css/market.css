@@ -1,19 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Philosopher');
 
 html {
-  margin-left: calc(100vw - 100%);
-  margin-right: 0;
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
 }
 
 body {
     color: #333;
-    background: #fefef2 url(../media/image/bg.jpg) no-repeat 50% 0;
+    background: #fefef2 url(/media/image/bg.jpg) no-repeat 50% 0;
     font-family: 'Philosopher', sans-serif;
 }
 
-
 .container { width: 1060px !important; background-color: white}
-
 
 .header {
     height: 140px;
@@ -61,10 +59,6 @@ body {
 .nav li {
     font-size: 16px;
     border-bottom: 1px solid gainsboro;
-}
-
-.nav-cat li {
-
 }
 
 .head {
@@ -120,35 +114,6 @@ body {
     position: absolute;
     top: 145px;
     left: 10px;
-}
-
-#progressbar-slide {
-    position: absolute;
-    height: 5px;
-    width: 0px;
-    background-color: red;
-    top: 0;
-    left: 15px;
-}
-
-
-.first {
-    background: yellow;
-}
-
-.second {
-    background: black;
-}
-
-.third {
-    background: blue;
-}
-
-.text-slider {
-    position: relative;
-    top: 60px;
-    left: 120px;
-    font-size: 75px;
 }
 
 .logo {
@@ -250,7 +215,7 @@ body {
 }
 
 .basket-icon {
-    background: url(../media/image/basket.png) 0 0 no-repeat;
+    background: url(/media/image/basket.png) 0 0 no-repeat;
     background-size: 100%;
     position: absolute;
     right: 50px;
@@ -409,7 +374,7 @@ body {
 }
 
 .minplus-basket {
-    padding: 0px 5px 5px 5px;
+    padding: 0 5px 5px 5px;
 }
 
 .minplus:hover {
@@ -449,7 +414,7 @@ body {
 }
 
 .border-image img {
-    position: absolute;  /* подробнее про position: absolute; */
+    position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
@@ -476,7 +441,7 @@ body {
 }
 
 .small-image img {
-    position: absolute;  /* подробнее про position: absolute; */
+    position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
@@ -554,7 +519,7 @@ body {
 .product-photo-basket {
     position: relative;
     top: 0;
-    left: 0px;
+    left: 0;
     width: 130px;
     height: 125px;
     text-align: center;
@@ -733,8 +698,8 @@ body {
     position: absolute;
     background: rgb(252, 240, 179);
     text-align: center;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 170px;
     box-shadow: 0 0 2px black;
     z-index: 100;
@@ -799,12 +764,11 @@ body {
     position: absolute;
     background: #ffffff;
     width: 300px;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     z-index: 10;
     border-radius: 3px;
     box-shadow: 0 0 3px black;
-
 }
 
 .search-item {
