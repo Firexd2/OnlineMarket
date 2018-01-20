@@ -8,3 +8,4 @@ db.sqlite3
 *.log
 media/banner
 media/products
+local_settings.py
