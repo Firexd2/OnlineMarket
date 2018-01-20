@@ -1,5 +1,5 @@
 from django.core.mail import EmailMessage
-from ProjectOnlineMarket.Celery import app
+from Celery import app
 
 
 @app.task
