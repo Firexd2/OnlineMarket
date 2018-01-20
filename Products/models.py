@@ -128,7 +128,7 @@ class Product(models.Model):
 
 
 def directory_path(instance, filename):
-    return 'products/{0}/{1}'.format(instance.product.name, filename)
+    return 'products/{0}/{1}'.format(instance.product.name_url, filename)
 
 
 class ImageProduct(models.Model):
