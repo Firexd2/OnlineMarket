@@ -9,3 +9,7 @@ db.sqlite3
 media/banner
 media/products
 local_settings.py
+static/admin/
+static/admin_tools/
+static/css/
+static/js/
