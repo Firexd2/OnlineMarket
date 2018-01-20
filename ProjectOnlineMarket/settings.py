@@ -122,9 +122,9 @@ WSGI_APPLICATION = 'ProjectOnlineMarket.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'myproject',
-        'USER': 'myprojectuser',
-        'PASSWORD': 'password',
+        'NAME': 'shop',
+        'USER': 'shopadm',
+        'PASSWORD': 'authpostgres',
         'HOST': 'localhost',
         'PORT': '',
     }
