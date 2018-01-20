@@ -177,10 +177,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'your Email'
-EMAIL_HOST_PASSWORD = 'Email password'
-EMAIL_PORT = 587
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'shop@beloglazov.me'
+EMAIL_HOST_PASSWORD = 'Qwerty123'
+EMAIL_PORT = 465
 
 LOGIN_REDIRECT_URL = '/'
 
