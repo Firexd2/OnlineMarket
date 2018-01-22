@@ -840,20 +840,6 @@ body {
     color: #565656;
 }
 
-#close-welcome {
-    position: absolute;
-    cursor: pointer;
-    right: 440px;
-    top: 22px;
-    font-size: 20px;
-    transition: 0.2s;
-}
-
-#close-welcome:hover {
-    color: #ff9a06;
-    transition: 0.5s;
-}
-
 #info {
     position: absolute;
     cursor: pointer;

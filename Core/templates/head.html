@@ -38,7 +38,12 @@
     </div>
     <script>
         $('#info').on('click', function () {
-            $('#welcome-block').show(300)
+            var block = $('#welcome-block');
+            if (block.css('display') === 'none') {
+                block.show(300)
+            } else {
+                block.hide(300)
+            }
         })
     </script>
 </div>

@@ -1,21 +1,12 @@
-<div style="
-        {% if welcome %}
-            display: none
-        {% endif %}" id="welcome-block">
-    Если во время тестирования вы заметили <u>ошибки</u> и/или <u>недоработки</u>, пожалуйста,<br> оповестите меня об этом по почте <b>den@beloglazov.me</b> <br><br>
-    Используемые технологии: <br>
-    - <u>Backend</u>: <b>Python</b>, <b>Django 2.0</b>. D качестве базы данных - <b>PostgreSQL</b>. Для ассинхронных задач <b>Celery</b> + <b>Redis</b>.<br>
-    - <u>Frontend</u>: <b>Jquery</b>, <b>Ajax</b>, <b>Bootstrap</b>. + использование <b>встроенного Django шаблонизатора</b>. <br>
-    - Магазин расположен и работает под <b>Ubuntu 16.04 + nginx + wsgi</b>. <br><br>
-    Если у вас есть коммерческое предложение, пожалуйста, свяжитесь со мной по почте <b>den@beloglazov.me</b>
-    <br>
-
-    <div id="close-welcome">
-        <span class="glyphicon glyphicon-remove"></span>
+    <div style="
+            {% if welcome %}
+                display: none
+            {% endif %}" id="welcome-block">
+        Если во время тестирования вы заметили <u>ошибки</u> и/или <u>недоработки</u>, пожалуйста,<br> оповестите меня об этом по почте <b>den@beloglazov.me</b> <br><br>
+        Используемые технологии: <br>
+        - <u>Backend</u>: <b>Python</b>, <b>Django 2.0</b>. D качестве базы данных - <b>PostgreSQL</b>. Для ассинхронных задач <b>Celery</b> + <b>Redis</b>.<br>
+        - <u>Frontend</u>: <b>Jquery</b>, <b>Ajax</b>, <b>Bootstrap</b>. + использование <b>встроенного Django шаблонизатора</b>. <br>
+        - Магазин расположен и работает под <b>Ubuntu 16.04 + nginx + wsgi</b>. <br><br>
+        Если у вас есть коммерческое предложение, пожалуйста, свяжитесь со мной по почте <b>den@beloglazov.me</b>
+        <br>
     </div>
-</div>
-<script>
-    $('#close-welcome').on('click', function () {
-        $(this).parent().hide(300);
-    });
-</script>
