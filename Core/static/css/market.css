@@ -712,8 +712,8 @@ body {
 
 #modal-window-for-favorite {
     position: fixed;
-    top: 20%;
-    left: 32%;
+    top: 27%;
+    left: 37%;
     z-index: 1234;
     background: white;
     height: 340px;
@@ -830,4 +830,41 @@ body {
     background: #e0e0e0 none;
     border-color: #dbdbdb;
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+}
+
+#welcome-block {
+    background: rgba(228, 185, 20, 0.25);
+    padding: 10px 10px 10px 10px;
+    margin: 13px 0 13px 0;
+    font-size: 16px;
+    color: #565656;
+}
+
+#close-welcome {
+    position: absolute;
+    cursor: pointer;
+    right: 440px;
+    top: 22px;
+    font-size: 20px;
+    transition: 0.2s;
+}
+
+#close-welcome:hover {
+    color: #ff9a06;
+    transition: 0.5s;
+}
+
+#info {
+    position: absolute;
+    cursor: pointer;
+    right: 380px;
+    top: 10px;
+    font-size: 20px;
+    transition: 0.2s;
+    opacity: 0.5;
+}
+
+#info:hover {
+    opacity: 1;
+    transition: 0.5s;
 }

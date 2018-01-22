@@ -15,6 +15,10 @@ def get_client_ip(request):
 
 def get_info_for_all_page(request):
 
+    # Приветственное сообщение для shop.beloglazov.me
+    welcome = False
+    if not get_client_ip(request) in Visitation.objects.all():
+        welcome = True
     Visitation.objects.update_or_create(ip=get_client_ip(request))
 
     category_list = Category.objects.all()
@@ -31,9 +35,10 @@ def get_info_for_all_page(request):
         price = item.product.new_price if item.product.new_price else item.product.price
         total_amount += price * item.count
     data = {'number_product_in_basket': number_product_in_basket,
-            'category_list': category_list, 'total_amount': total_amount}
+            'category_list': category_list, 'total_amount': total_amount, 'welcome': welcome}
     if not request.is_ajax():
         return data
     else:
         del data['category_list']
+        del data['welcome']
         return JsonResponse(data)

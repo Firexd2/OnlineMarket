@@ -6,6 +6,12 @@ _MAX_SIZE = 150
 _MAX_SIZE_2 = 500
 UPLOAD_IMG_PRODUCTS = 'products/'
 
+DICT_LETTERS = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'ye', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
+                'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
+                'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch',
+                'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya', ' ': '_', '-': '_', ',': '_',
+                '"': '_', '(': '_', ')': '_', '№': '_'}
+
 
 class SettingsProduct(models.Model):
     proteins = models.CharField('Белки', max_length=30, blank=True, null=True)
@@ -39,15 +45,11 @@ class Category(models.Model):
         return '%s' % self.name
 
     def save(self, *args, **kwargs):
-        dict_letters = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'ye', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
-                        'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
-                        'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch',
-                        'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya', ' ': '_', '-': '_', ',': '_'}
         name_url = ''
         self.name = self.name.lower()
         for letter in self.name:
             try:
-                name_url += dict_letters[letter]
+                name_url += DICT_LETTERS[letter]
             except KeyError:
                 name_url += letter
         self.name_url = name_url
@@ -98,15 +100,12 @@ class Product(models.Model):
         return result
 
     def save(self, *args, **kwargs):
-        dict_letters = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'ye', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
-                        'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r',
-                        'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'shch',
-                        'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya', ' ': '_', '-': '_', ',': '_'}
+
         name_url = ''
         self.name = self.name.lower()
         for letter in self.name:
             try:
-                name_url += dict_letters[letter]
+                name_url += DICT_LETTERS[letter]
             except KeyError:
                 name_url += letter
         self.name_url = name_url

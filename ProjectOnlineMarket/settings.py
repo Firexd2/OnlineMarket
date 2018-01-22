@@ -108,12 +108,6 @@ ADMIN_TOOLS_THEMING_CSS = '/static_for_admin/admin-theme.css'
 #     'Core.admin.admin_panel': 'Core.custom_admin.min_admin_dashboard.CustomAppIndexDashboard',
 # }
 
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    'Core/static/',
-]
-
 WSGI_APPLICATION = 'ProjectOnlineMarket.wsgi.application'
 
 # Database
