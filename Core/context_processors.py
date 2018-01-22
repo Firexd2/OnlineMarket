@@ -17,7 +17,7 @@ def get_info_for_all_page(request):
 
     # Приветственное сообщение для shop.beloglazov.me
     welcome = False
-    if not get_client_ip(request) in Visitation.objects.all():
+    if Visitation.objects.filter(ip=get_client_ip(request)):
         welcome = True
     Visitation.objects.update_or_create(ip=get_client_ip(request))
 

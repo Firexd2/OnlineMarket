@@ -14,14 +14,8 @@
         <span class="glyphicon glyphicon-remove"></span>
     </div>
 </div>
-<div id="info">
-    <i class="fa fa-info-circle" aria-hidden="true"></i>
-</div>
 <script>
     $('#close-welcome').on('click', function () {
-        $(this).parent().hide();
+        $(this).parent().hide(300);
     });
-    $('#info').on('click', function () {
-        $('#welcome-block').show()
-    })
 </script>

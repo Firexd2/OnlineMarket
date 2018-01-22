@@ -857,7 +857,7 @@ body {
 #info {
     position: absolute;
     cursor: pointer;
-    right: 380px;
+    right: -35px;
     top: 10px;
     font-size: 20px;
     transition: 0.2s;
