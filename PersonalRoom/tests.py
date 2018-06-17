@@ -1,6 +1,6 @@
-from django.test import TestCase
-from .urls import urlpatterns
 from django.contrib.auth.models import User
+from django.test import TestCase
+
 from PersonalRoom.models import AdditionalUser, FavoritesProducts
 from Products.models import Product, SettingsProduct
 

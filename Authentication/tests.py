@@ -1,10 +1,8 @@
-from django.test import TestCase, Client
-from Authentication.validator import validate_email_on_unique
-from django.core.exceptions import ValidationError
-from Authentication.forms import RegistrationForm
 from django.contrib.auth.models import User
-from .forms import CustomAuthenticationForm as AuthForm
-from django.contrib.auth import authenticate
+from django.core.exceptions import ValidationError
+from django.test import TestCase, Client
+
+from Authentication.validator import validate_email_on_unique
 
 
 class AuthTest(TestCase):

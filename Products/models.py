@@ -1,6 +1,6 @@
-from django.urls import reverse
-from django.db import models
 from PIL import Image as Im
+from django.db import models
+from django.urls import reverse
 
 _MAX_SIZE = 150
 _MAX_SIZE_2 = 500

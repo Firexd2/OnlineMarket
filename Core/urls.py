@@ -1,11 +1,11 @@
 from django.conf.urls import url, include
 from django.conf.urls.static import static
-from ProjectOnlineMarket import settings
-from Core import views
-from Products import views as views_product
 from django.contrib import admin
-from Core.admin import admin_panel
 
+from Core import views
+from Core.admin import admin_panel
+from Products import views as views_product
+from ProjectOnlineMarket import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

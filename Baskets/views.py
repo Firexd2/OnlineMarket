@@ -2,8 +2,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import TemplateView
 from django.views.generic.base import View
+
 from Baskets.models import ElementBasket
-from Products.models import Product
 
 
 class BasketTemplateView(TemplateView):

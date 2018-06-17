@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+
 from Baskets.models import ElementBasket
 from Products.models import Category
 from .models import Visitation

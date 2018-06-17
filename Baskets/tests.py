@@ -1,7 +1,8 @@
-from django.test import TestCase
-from .models import ElementBasket
-from Products.models import Product, SettingsProduct
 from django.contrib.auth.models import User
+from django.test import TestCase
+
+from Products.models import Product, SettingsProduct
+from .models import ElementBasket
 
 
 class BasketTest(TestCase):

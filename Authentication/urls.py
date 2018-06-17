@@ -31,4 +31,3 @@ urlpatterns = [
     url(r'^password_reset_complete/$', auth_views.password_reset_complete,
         {'template_name': 'password_reset_complete.html'}, name='password_reset_complete'),
 ]
-

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from PersonalRoom.models import AdditionalUser, FavoritesProducts
+
 from Core.admin import MixinSearchElements
+from PersonalRoom.models import AdditionalUser, FavoritesProducts
 
 admin.site.register(AdditionalUser, MixinSearchElements)
 

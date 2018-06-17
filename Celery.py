@@ -1,5 +1,7 @@
 import os
+
 from celery import Celery
+
 from ProjectOnlineMarket import settings
 from ProjectOnlineMarket.settings import BROKER_URL
 

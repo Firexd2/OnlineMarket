@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.shortcuts import redirect
-from Products.forms import ImageAdminForm
-from Products import models
+
 from Core.admin import admin_panel, MixinSearchElements
+from Products import models
+from Products.forms import ImageAdminForm
 
 
 class ProductsAdmin(admin.ModelAdmin):

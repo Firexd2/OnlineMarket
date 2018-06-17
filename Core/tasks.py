@@ -1,4 +1,5 @@
 from django.core.mail import EmailMessage
+
 from Celery import app
 
 

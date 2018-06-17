@@ -1,8 +1,10 @@
-from admin_tools.dashboard import modules
-from Orders.models import *
-from Core.models import Visitation
-from Products.models import Product
 from datetime import datetime, timedelta
+
+from admin_tools.dashboard import modules
+
+from Core.models import Visitation
+from Orders.models import *
+from Products.models import Product
 
 
 class StatOrderModule(modules.DashboardModule):

@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from Products.models import Product, SettingsProduct, Category
 
 

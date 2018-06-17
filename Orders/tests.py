@@ -1,9 +1,9 @@
-from django.test import TestCase, Client
-from Baskets.models import ElementBasket
-from Products.models import Product, SettingsProduct
-from Orders.models import Order, OrderItemProduct
 from django.contrib.auth.models import User
-from Orders.forms import OrderForm
+from django.test import TestCase
+
+from Baskets.models import ElementBasket
+from Orders.models import Order
+from Products.models import Product, SettingsProduct
 
 
 class OrderCreateTest(TestCase):
